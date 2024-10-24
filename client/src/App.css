@@ -1,0 +1,35 @@
+/* body {
+    background-color: #111;
+    display: flex;
+    align-items: center;
+    place-content: center;
+}
+
+#heading {
+    color: #e60d0d;
+    text-align: center;
+}
+
+.todo-container {
+    background-color: #333;
+    color: #bbb;
+    max-width: 70vw;
+    min-width: 70vw;
+    width: 70vw;
+    height: 5rem;
+    position: relative;
+}
+
+.todo-title {
+    background-color: #444;
+    color: #bbb;
+}
+
+.todo-checkbox {
+    padding: 16px;
+    margin: 14px;
+    size: 20px;
+    font-size: 25px;
+    background-color: #f00;
+
+} */
