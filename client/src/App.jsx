@@ -1,3 +1,4 @@
+import { TodoProvider } from '../components/context api';
 import CreateTodo from '../components/create todo';
 import TodoList from '../components/show todos';
 import './App.css';
@@ -9,8 +10,10 @@ function App() {
             <h1 id="heading">
                 Todo List
             </h1>
-            <TodoList />
-            <CreateTodo />
+            <TodoProvider>
+                <CreateTodo />
+                <TodoList />
+            </TodoProvider>
 
         </div>
     );

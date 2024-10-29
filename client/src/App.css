@@ -1,35 +1,38 @@
-/* body {
+body {
     background-color: #111;
+    color: #eee;
     display: flex;
     align-items: center;
     place-content: center;
 }
 
 #heading {
-    color: #e60d0d;
+    color: rgb(0, 100, 255);
     text-align: center;
 }
 
 .todo-container {
-    background-color: #333;
-    color: #bbb;
-    max-width: 70vw;
-    min-width: 70vw;
-    width: 70vw;
-    height: 5rem;
-    position: relative;
+}
+
+.all-todos {
+    
+}
+
+.todo-div {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.todo-checkbox {
 }
 
 .todo-title {
     background-color: #444;
     color: #bbb;
+    list-style-type: none;
+    display: inline;
+    width: 50vw;
 }
 
-.todo-checkbox {
-    padding: 16px;
-    margin: 14px;
-    size: 20px;
-    font-size: 25px;
-    background-color: #f00;
-
-} */
+.todo-delete {
+}
