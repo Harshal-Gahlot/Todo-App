@@ -5,9 +5,9 @@ import './App.css';
 function App() {
     console.log(localStorage.getItem("token"))
     return (
-        <>
+        <div id="app-root-container">
             {localStorage.getItem("token") ? <TodoPage /> : <LandingPage />}
-        </>
+        </div>
     );
 }
 

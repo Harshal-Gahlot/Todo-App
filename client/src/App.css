@@ -1,3 +1,24 @@
+@font-face {
+    font-family: Caveat;
+    src: url(../public/fonts/Caveat-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: Inter;
+    src: url(../public/fonts/Inter-VariableFont_opsz\wght.ttf);
+}
+@font-face {
+    font-family: Montserrat;
+    src: url(../public/fonts/Montserrat-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: Poppins;
+    src: url(../public/fonts/Poppins-Regular.ttf);
+}
+@font-face {
+    font-family: OpenSans;
+    src: url(../public/fonts/OpenSans-VariableFont_wdth\wght.ttf);
+}
+
 /* body {
     background-color: #111;
     color: #eee;
@@ -36,3 +57,115 @@
 
 .todo-delete {
 } */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#app-root-container {
+    background: linear-gradient(to right, #ffc800 30vw, #0b5ae2 100vw);
+    color: white;
+    width: 100vw;
+    height: 100vh;
+}
+
+#landing-page-container {
+    display: flex;
+    /* background-color: #0f0; */
+    height: 100vh;
+    position: relative;
+}
+
+#landing-page-left {
+    width: 70vw;
+    position: relative;
+    padding-left: 10%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    /* background-color: #ffc800; */
+}
+
+#landing-page-left h1 {
+    font-size: 6.8vw;
+    font-family: caveat;
+    color: #fff;
+}
+
+#landing-page-left p {
+    font-size: 3.5vw;
+    font-family: Poppins;
+    color: #000;
+}
+
+#landing-page-left span {
+    color:#353333;
+    font-family: inter;
+    /* padding-left: 5%; */
+}
+
+#landing-page-right {
+    width: 30vw;
+    position: relative;
+    /* background-color: #0b5ae2; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.landing-page-signin-btn,
+.landing-page-signup-btn {
+    padding: 10px;
+    width: 50%;
+    font-size: 20px;
+    border: none;
+    border-radius: 100px;
+    font-family: Montserrat;
+}
+
+#signup-container,
+#signin-container {
+    /* background-color: #f00; */
+}
+
+@media screen and (max-width: 800px) {
+    #app-root-container {
+        position: relative;
+        background: linear-gradient(to bottom, #ffc800 30%, #850be2 100%);
+    }
+
+    #landing-page-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #landing-page-left {
+        height: 70%;
+        width: 100%;
+        padding: 5%;
+        display: flex;
+        justify-content:flex-start;
+        padding-top: 40%;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    #landing-page-right {
+        height: 0%;
+        width: 100%;
+        gap: 16px;
+    }
+
+    #landing-page-left h1 {
+        font-size: 12vw;
+    }
+
+    #landing-page-left p {
+        font-size: 6vw;
+    }
+}

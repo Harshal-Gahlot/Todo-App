@@ -10,7 +10,7 @@ export default function CreateTodo() {
         console.log("In add Todo");
         try {
             setTodos((pre_todos) => [...pre_todos, { title, done: false }]);
-            const res = await axios.post("https://todo-app-be-0kqo.onrender.com/todo", {
+            const res = await axios.post("http://localhost:3000/todo", {
                 title: title,
             }, {
                 headers: { token: localStorage.getItem("token") }

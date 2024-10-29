@@ -106,8 +106,8 @@ app.post("/todo", auth, async (req, res) => {
         userId: req.userId
     };
     console.log(todo);
-    await TodoModel.create(todo);
-    res.send("TO-DO Created Successfully!");
+    const response = await TodoModel.create(todo);
+    res.json(response);
 });
 
 app.patch("/todo/:id", auth, async (req, res) => {

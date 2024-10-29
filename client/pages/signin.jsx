@@ -7,7 +7,6 @@ export default function Signin() {
     const [password, setPassword] = useState('');
 
     async function sendSigninReq(event) {
-        event.preventDefault();
         console.log(email, password);
         const responce = await axios.post("https://todo-app-be-0kqo.onrender.com/signin", { email, password });
         console.log(responce)
