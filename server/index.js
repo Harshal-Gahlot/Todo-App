@@ -66,7 +66,7 @@ app.post("/signup", async (req, res) => {
             res.send("USER ALREADY EXIST WITH THIS EMAIL");
         } else {
             console.error(e);
-            res.send("You got error");
+            res.send(`You got error harshal: ${e}`);
         }
     }
 });
