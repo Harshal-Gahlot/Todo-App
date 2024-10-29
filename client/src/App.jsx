@@ -1,5 +1,5 @@
 import LandingPage from '../pages/landing page';
-import TodoPage from '../pages/Todo page';
+import TodoPage from '../pages/display todos page';
 import './App.css';
 
 function App() {
