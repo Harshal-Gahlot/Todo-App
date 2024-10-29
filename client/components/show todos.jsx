@@ -33,7 +33,7 @@ export default function TodoList() {
         ));
 
         try {
-            await axios.patch(`http://localhost:3000/todo/${todoId}`, updatedData, {
+            await axios.patch(`https://todo-app-be-0kqo.onrender.com/todo/${todoId}`, updatedData, {
                 headers: {
                     "token": localStorage.getItem("token")
                 }
@@ -53,7 +53,7 @@ export default function TodoList() {
         setTodos((prev_todos) => prev_todos.filter(todo => todo._id != todoId));
 
         try {
-            const deletedTodo = await axios.delete(`http://localhost:3000/todo/${todoId}`, {
+            const deletedTodo = await axios.delete(`https://todo-app-be-0kqo.onrender.com/todo/${todoId}`, {
                 headers: {
                     "token": localStorage.getItem("token")
                 }
