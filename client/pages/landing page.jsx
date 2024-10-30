@@ -1,6 +1,15 @@
 import { useState } from "react";
 import Signup from "./signup";
 import Signin from "./signin";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "../src/components/ui/dialog"
+
 
 export default function LandingPage() {
     const [authMethod, setAuthMethod] = useState(null);
@@ -26,6 +35,20 @@ export default function LandingPage() {
                 {authMethod === null && <button className="landing-page-signin-btn"
                     onClick={() => setAuthMethod("signin")}>Sign in</button>}
                 {authMethod === "signin" && <Signin />}
+                <Dialog>
+                    <DialogTrigger>Open</DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Are you absolutely sure?</DialogTitle>
+                            <DialogDescription>
+                                This action cannot be undone. This will permanently delete your account
+                                and remove your data from our servers.
+                            </DialogDescription>
+                        </DialogHeader>
+                    </DialogContent>
+                </Dialog>
+
+           
 
             </section>
         </div>
