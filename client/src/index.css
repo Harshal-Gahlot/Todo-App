@@ -1,0 +1,26 @@
+@font-face {
+    font-family: Caveat;
+    src: url(../fonts/Caveat-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: Inter;
+    src: url(../fonts/Inter-VariableFont_opsz\wght.ttf);
+}
+@font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: Poppins;
+    src: url(../fonts/Poppins-Regular.ttf);
+}
+@font-face {
+    font-family: OpenSans;
+    src: url(../fonts/OpenSans-VariableFont_wdth\wght.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

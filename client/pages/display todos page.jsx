@@ -8,10 +8,8 @@ export default function TodoPage() {
             <h1 id="heading">
                 Todo List
             </h1>
-            <TodoProvider>
-                <CreateTodo />
-                <TodoList />
-            </TodoProvider>
+            <CreateTodo />
+            <TodoList />
         </div>
-    )
+    );
 }
