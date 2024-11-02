@@ -15,7 +15,7 @@ export default function Signup() {
     }
 
     return (
-        <div className="auth-form-bg" onClick={() => setAuthMethod(null) }>
+        <div className="auth-form-bg" onClick={() => setAuthMethod(null)}>
             <form id="signup-container" className="auth-form-container" onClick={(event) => event.stopPropagation()} onSubmit={sendSignupReq}>
                 <label htmlFor="user-name-signup" className="auth-label">Name</label>
                 <input type="text" className="auth-input" id="user-name-signup"

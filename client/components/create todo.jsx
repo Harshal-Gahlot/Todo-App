@@ -9,15 +9,18 @@ export default function CreateTodo() {
     async function addTodo() {
         console.log("In add Todo");
         try {
-            setTodos((pre_todos) => [...pre_todos, { title, done: false }]);
-            const res = await axios.post("http://localhost:3000/todo", {
+            const key = `${Date.now()}`;
+            setTodos((pre_todos) => [...pre_todos, { title, "done": false, _id: key }]);
+            const res = await axios.post("https://todo-app-be-0kqo.onrender.com/todo", {
                 title: title,
             }, {
                 headers: { token: localStorage.getItem("token") }
             });
-            console.log('res:', res);
+            setTodos((pre_todos) => pre_todos.map(todo => todo._id == key ? res.data : todo));
+
         } catch (err) {
             console.error("\nThere is an error: \n", err);
+            setTodos((pre_todos) => pre_todos.map(todo => todo._id == key ? null : todo));
         }
     }
 

@@ -9,16 +9,22 @@ export default function Signin() {
     const { setAuthMethod } = useContext(TodoContext);
 
     async function sendSigninReq(event) {
-        console.log(email, password);
-        const responce = await axios.post("https://todo-app-be-0kqo.onrender.com/signin", { email, password });
-        console.log(responce);
-        const token = responce.data.token;
-        localStorage.setItem("token", token);
+        event.preventDefault();
+        console.log("in sendSiginReq", email, password);
+        try {
+            const res = await axios.post("https://todo-app-be-0kqo.onrender.com/signin", { email, password });
+            localStorage.setItem("token", res.data.token);
+            window.location.reload();
+        } catch (e) {
+            console.log(`Error occured: ${e}`);
+        }
     }
 
     return (
         <div className="auth-form-bg" onClick={() => setAuthMethod(null)}>
-            <form id="signin-container" className="auth-form-container" onClick={(event) => event.stopPropagation()} onSubmit={sendSigninReq}>
+            <form id="signin-container" className="auth-form-container"
+                onClick={(event) => event.stopPropagation()}
+            >
                 <label htmlFor="user-email-signin" className="auth-label" >Email</label>
                 <input type="email" id="user-email-signin" className="auth-input"
                     value={email} onChange={(e) => setEmail(e.target.value)}
@@ -27,7 +33,7 @@ export default function Signin() {
                 <input type="password" id="user-password-signin" className="auth-input"
                     value={password} onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit" className="auth-form-submit-btn">Sign in</button>
+                <button type="submit" className="auth-form-submit-btn" onClick={sendSigninReq}>Sign in</button>
             </form>
         </div>
     );

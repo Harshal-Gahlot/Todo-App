@@ -57,7 +57,7 @@ app.post("/signup", async (req, res) => {
             password: hashPassword,
         };
         await UserModel.create(userData);
-
+        console.log("sign up successful")
         res.send("YOU ARE SIGN UP");
 
     } catch (e) {
@@ -80,22 +80,23 @@ app.post("/signin", async (req, res) => {
     });
 
     if (!response) {
-        res.send("User donesn't exist, Sign up?");
+        console.log("User donesn't exist, Sign up?")
+        res.status(404).json({"message":"User doesn't exist, Sign up?"});
         return;
     }
 
     const userMached = await bcrypt.compare(password, response.password);
 
     if (!userMached) {
+        console.log("incorrect creds")
         res.status(403).json({
-            message: "Incorrect creds"
+            "message": "Incorrect creds"
         });
     }
 
-    const token = jwt.sign({
-        id: response._id.toString()
-    }, JWT_SECRET);
-    res.json({ token });
+    const token = jwt.sign({ id: response._id.toString() }, JWT_SECRET);
+    console.log("sign in successful")
+    res.status(200).json({ "token": token });
 });
 
 app.post("/todo", auth, async (req, res) => {
@@ -105,14 +106,15 @@ app.post("/todo", auth, async (req, res) => {
         done: false,
         userId: req.userId
     };
-    console.log(todo);
     const response = await TodoModel.create(todo);
+    console.log(response);
     res.json(response);
 });
 
 app.patch("/todo/:id", auth, async (req, res) => {
     const todoId = req.params.id;
-    console.log("\nPATCH req came with id:", todoId);
+    console.log("\nPATCH req came with todo id:", todoId);
+    id === 'undefined' && res.status(404).json({ "message": "the patch todo's ID was not provided" })
 
     const toUpdateTodo = await TodoModel.findById(todoId);
     console.log('before updating toUpdateTodo', toUpdateTodo);
@@ -128,6 +130,7 @@ app.delete("/todo/:id", auth, async (req, res) => {
     console.log('delete req came');
     const id = req.params.id;
     console.log('delete todo req came with id', id);
+    id === 'undefined' && res.status(404).json({"message": "the todo to delete ID isen't provided"})
     const todoToDelete = await TodoModel.findByIdAndDelete({ _id: id });
     res.status(200).send(`todo deleted successfully! ${todoToDelete}`);
 });
