@@ -4,12 +4,15 @@ import TodoList from '../components/show todos';
 
 export default function TodoPage() {
     return (
-        <div>
-            <h1 id="heading">
+        <div id="todo-page">
+            <h1 id="todo-page-heading">
                 Todo List
             </h1>
-            <CreateTodo />
-            <TodoList />
+            <div id='create-show-all-todo-container'>
+                <CreateTodo />
+                <TodoList />
+            </div>
+                
         </div>
     );
 }

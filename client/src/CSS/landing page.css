@@ -1,13 +1,12 @@
 #app-root-container {
-    background: linear-gradient(to right, #ffc800 30vw, #0b5ae2 100vw);
-    color: white;
+    background-color: var(--base-color);
+    color: var(--base-color);
     width: 100vw;
     height: 100vh;
 }
 
 #landing-page-container {
     display: flex;
-    /* background-color: #0f0; */
     height: 100vh;
     position: relative;
 }
@@ -20,23 +19,22 @@
     justify-content: center;
     flex-direction: column;
     gap: 2rem;
-    /* background-color: #ffc800; */
 }
 
 #landing-page-left h1 {
     font-size: 6.8vw;
     font-family: caveat;
-    color: #fff;
+    color: var(--text-color);
 }
 
 #landing-page-left p {
     font-size: 3.5vw;
     font-family: Poppins;
-    color: #000;
+    color: var(--text-varient);
 }
 
 #landing-page-left span {
-    color: #353333;
+    color: var(--text-varient);
     font-family: inter;
     /* padding-left: 5%; */
 }
@@ -44,7 +42,6 @@
 #landing-page-right {
     width: 30vw;
     position: relative;
-    /* background-color: #0b5ae2; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,6 +56,8 @@
     border: none;
     border-radius: 100px;
     font-family: Montserrat;
+    background-color: var(--text-color);
+    color: var(--base-color);
 }
 
 .auth-form-bg {
@@ -69,7 +68,7 @@
     display: grid;
     place-content: center;
     align-self: flex-end;
-    background-color: #00000055;
+    background-color: var(--base-varient);
 }
 
 .auth-form-container {
@@ -81,8 +80,8 @@
     position: relative;
     padding: 4vh 4vw;
     border-radius: 20px;
-    background-color: rgb(255, 190, 0);
-    color: #1b6fed;
+    background-color: var(--base-color);
+    color: var(--text-color);
     height: fit-content;
 }
 
@@ -93,7 +92,7 @@
     border: none;
     margin-bottom: 10px;
     background: rgb(255, 255, 255);
-    color: #000;
+    color: var(--base-color)
 }
 
 .auth-label {
@@ -110,14 +109,15 @@
     border: none;
     margin-bottom: 10px;
     font-family: Poppins;
-    background-color: #1b6fed;
-    color: #fff;
+    background-color: var(--unique-color);
+    color: var(--text-color);
 }
 
 @media screen and (max-width: 800px) {
     #app-root-container {
         position: relative;
-        background: linear-gradient(to bottom, #ffc800 30%, #850be2 100%);
+        background-color: var(--base-color);
+        color: var(--text-color);
     }
 
     #landing-page-container {
@@ -158,42 +158,3 @@
         padding: 4vh 8vw;
     }
 }
-
-/* body {
-    background-color: #111;
-    color: #eee;
-    display: flex;
-    align-items: center;
-    place-content: center;
-}
-
-#heading {
-    color: rgb(0, 100, 255);
-    text-align: center;
-}
-
-.todo-container {
-}
-
-.all-todos {
-    
-}
-
-.todo-div {
-    display: flex;
-    margin-bottom: 10px;
-}
-
-.todo-checkbox {
-}
-
-.todo-title {
-    background-color: #444;
-    color: #bbb;
-    list-style-type: none;
-    display: inline;
-    width: 50vw;
-}
-
-.todo-delete {
-} */
