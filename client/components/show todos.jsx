@@ -70,12 +70,10 @@ export default function TodoList() {
         <ul className="all-todos" >
             {todos.map((todo) =>
                 <div className="single-todo-container" key={todo._id}>
-                    <input
-                        type="checkbox"
+                    <input type="checkbox"
                         className="todo-checkbox" id={`todo-checkbox-${todo._id}`}
-                        checked={todo.done}
                         onChange={() => updateTodo(todo._id, { "done": !todo.done })}
-                    />
+                        checked={todo.done} />
                     <label htmlFor={`todo-checkbox-${todo._id}`} className="todo-title">
                         <span>{todo.title}</span>
                     </label>

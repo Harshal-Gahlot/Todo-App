@@ -1,22 +1,22 @@
 @font-face {
     font-family: Caveat;
-    src: url(../fonts/Caveat-VariableFont_wght.ttf);
+    src: url(fonts/Caveat.ttf);
 }
 @font-face {
     font-family: Inter;
-    src: url(../fonts/Inter-VariableFont_opsz\wght.ttf);
+    src: url(fonts/Inter.ttf);
 }
 @font-face {
     font-family: Montserrat;
-    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
+    src: url(fonts/Montserrat.ttf);
 }
 @font-face {
     font-family: Poppins;
-    src: url(../fonts/Poppins-Regular.ttf);
+    src: url(fonts/Poppins.ttf);
 }
 @font-face {
     font-family: OpenSans;
-    src: url(../fonts/OpenSans-VariableFont_wdth\wght.ttf);
+    src: url(/fonts/OpenSans.ttf);
 }
 
 * {
@@ -45,4 +45,29 @@
     --unique-color-light-1: #8fd3fe;
     --unique-color-light-2: #75d6ff;
     --common-color: #333;
+}
+
+#app-root-container {
+    background-color: var(--base-color);
+    color: var(--base-color);
+    width: 100%;
+    min-height:100vh;
+    height: 100%;
+}
+
+.btn {
+    background: var(--base-color);
+    border: none;
+    cursor: pointer;
+    display: grid;
+    border-radius: 50%;
+    padding: 8px;
+}
+
+.btn :first-child {
+    color:var(--text-color)
+}
+
+.btn:hover {
+    background-color: var(--base-varient);
 }
