@@ -7,29 +7,46 @@ export default function Signup() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const { authMethod, setAuthMethod } = useContext(TodoContext);
 
     async function sendSignupReq(event) {
+        event.preventDefault();
         console.log(name, email, password);
-        await axios.post("https://todo-app-be-0kqo.onrender.com/signup", { name, email, password });
+        try {
+            const res = await axios.post("https://todo-app-be-0kqo.onrender.com/signup", 
+                { name, email, password });
+            console.log("res", res);
+            if (res.string() === "OK") {
+                console.log("Sign up success");
+
+            } else {
+                setErrorMessage(res.data.ErrorMessage);
+            }
+        } catch (err) {
+            console.log("error while signing up", err);
+        }
     }
 
     return (
         <div className="auth-form-bg" onClick={() => setAuthMethod(null)}>
-            <form id="signup-container" className="auth-form-container" onClick={(event) => event.stopPropagation()} onSubmit={sendSignupReq}>
-                <label htmlFor="user-name-signup" className="auth-label">Name</label>
-                <input type="text" className="auth-input" id="user-name-signup"
+            <form id="signup-container" className="auth-form-container"
+                onClick={(event) => event.stopPropagation()} >
+                {/* <label htmlFor="user-name-signup" className="auth-label">Name</label> */}
+                <input type="text" className="auth-input" id="user-name-signup" placeholder="Name"
                     value={name} onChange={(e) => setName(e.target.value)}
                 />
-                <label htmlFor="user-email-signup" className="auth-label">Email</label>
-                <input type="email" className="auth-input" id="user-email-signup"
+                {/* <label htmlFor="user-email-signup" className="auth-label">Email</label> */}
+                <input type="email" className="auth-input" id="user-email-signup" placeholder="Email"
                     value={email} onChange={(e) => setEmail(e.target.value)}
                 />
-                <label htmlFor="user-password-signup" className="auth-label">Password</label>
-                <input type="password" className="auth-input" id="user-password-signup"
+                {/* <label htmlFor="user-password-signup" className="auth-label">Password</label> */}
+                <input type="password" className="auth-input"
+                    id="user-password-signup" placeholder="Password"
                     value={password} onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit" className="auth-form-submit-btn" >Sign up</button>
+                <button type="submit" className="auth-form-submit-btn" onClick={sendSignupReq}>Sign up</button>
+                <span className="ErrorInValidatingAuth">{errorMessage}</span>
             </form>
         </div>
     );

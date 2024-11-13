@@ -1,24 +1,3 @@
-@font-face {
-    font-family: Caveat;
-    src: url(fonts/Caveat.ttf);
-}
-@font-face {
-    font-family: Inter;
-    src: url(fonts/Inter.ttf);
-}
-@font-face {
-    font-family: Montserrat;
-    src: url(fonts/Montserrat.ttf);
-}
-@font-face {
-    font-family: Poppins;
-    src: url(fonts/Poppins.ttf);
-}
-@font-face {
-    font-family: OpenSans;
-    src: url(/fonts/OpenSans.ttf);
-}
-
 * {
     margin: 0;
     padding: 0;

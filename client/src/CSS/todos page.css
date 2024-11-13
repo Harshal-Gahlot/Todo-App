@@ -30,7 +30,7 @@
     /* position: relative; */
 }
 
-.create-todo-title {
+#create-todo-title {
     border-radius: 8px 0 0 8px;
     background-color: var(--base-varient);
     color: var(--text-color);
@@ -42,7 +42,7 @@
     padding: 8px 20px;
 }
 
-.create-todo-title::placeholder {
+#create-todo-title::placeholder {
     color: var(--text-varient);
 }
 
@@ -69,7 +69,12 @@
     display: flex;
 }
 
-.todo-checkbox[type="checkbox"]:checked + label span::after {
+.todo-checkbox {
+    cursor: pointer;
+    display: none;
+}
+
+.todo-checkbox[type="checkbox"]:checked + .todo-title label::after {
     width: 100%;
 }
 
@@ -80,21 +85,19 @@
 .todo-title {
     display: flex;
     align-items: center;
-    background-color: var(--base-color);
-    font-family: Poppins;
     font-size: 28px;
     color: var(--text-color);
-    list-style-type: none;
     width: 50vw;
-    position: relative;
     padding-left: 10px;
 }
 
-.todo-title span {
+.todo-title-text {
     position: relative;
+    cursor:pointer;
+    font-family: Poppins;
 }
 
-.todo-title span::after {
+.todo-title-text::after {
     content: "";
     position: absolute;
     left: 0;
@@ -102,12 +105,13 @@
     height: 2px; 
     background-color: currentColor;
     width: 0; 
-    transition: width 1s ease-in; 
+    transition: width 0.5s ease-in-out; 
 }
 
 .todo-delete {
     background-color: var(--base-color);
     border: none;
-    padding: 10px;
+    padding: 8px;
+    cursor: pointer;
 }
 

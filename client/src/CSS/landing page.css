@@ -22,7 +22,7 @@
 
 #landing-page-left p {
     font-size: 3.5vw;
-    font-family: Poppins;
+    /* font-family: Poppins; */
     color: var(--text-varient);
 }
 
@@ -80,12 +80,21 @@
 
 .auth-input {
     width: 100%;
-    padding: 6px 8px;
-    border-radius: 4px;
+    padding-bottom: 4px;
+    margin-bottom: 20px;
+    background: var(--base-color);
+    color: var(--text-color);
     border: none;
-    margin-bottom: 10px;
-    background: rgb(255, 255, 255);
-    color: var(--base-color)
+    border-bottom: 2px solid var(--text-color);
+    font-size: 1.1rem;
+}
+
+.auth-input::placeholder {
+    padding: 4px 0;
+    margin-bottom: 5px;
+}
+.auth-input:focus {
+    outline: none;
 }
 
 .auth-label {
@@ -104,6 +113,10 @@
     font-family: Poppins;
     background-color: var(--unique-color);
     color: var(--text-color);
+}
+
+.ErrorInValidatingAuth {
+    color: red;
 }
 
 @media screen and (max-width: 800px) {
