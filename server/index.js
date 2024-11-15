@@ -33,12 +33,12 @@ console.log("connedted to DB and const init");
 app.post("/signup", async (req, res) => {
     console.log("signup req came");
     const bodySchema = z.object({
-        email: z.string().email()
-            .max(100, { message: "Email must contain at most 100 characters" }),
-
         name: z.string()
             .min(3, { message: "Name must contain at least 3 characters" })
             .max(100, { message: "Name can contain at most 100 characters" }),
+
+        email: z.string().email().toLowerCase
+            .max(100, { message: "Email must contain at most 100 characters" }),
 
         password: z.string()
             .min(6, { message: "Password must contain at least 6 characters" })
@@ -49,7 +49,7 @@ app.post("/signup", async (req, res) => {
 
     console.log(success, data, error);
     if (!success) {
-        res.status(400).json({
+        res.status(200).json({
             ErrorMessage: error.issues[0].message
         });
         return;
@@ -59,21 +59,27 @@ app.post("/signup", async (req, res) => {
         const hashPassword = await bcrypt.hash(data.password, 5);
 
         const userData = {
-            email: data.email,
             name: data.name,
-            password: hashPassword,
+            email: data.email,
+            password: hashPassword
         };
-        await UserModel.create(userData);
-        console.log("sign up successful");
-        res.status(200).send("OK");
+        const userCreated = await UserModel.create(userData);
+        console.log("sign up successful", userCreated);
+        res.status(200).json({
+            ErrorMessage: "none"
+        });
 
     } catch (e) {
         if (e.code === 11000) {
             console.error("DUPLICATE ENTRY ERROR\n\n" + e);
-            res.status(409).send("USER ALREADY EXIST WITH THIS EMAIL");
+            res.status(409).json({
+                ErrorMessage: "USER ALREADY EXIST WITH THIS EMAIL"
+            });
         } else {
             console.error(e);
-            res.status(500).send(`You got an error bro: ${e}`);
+            res.status(500).json({
+                ErrorMessage: `You got an error bro: ${e}`
+            });
         }
     }
 });
@@ -108,10 +114,24 @@ app.post("/signin", async (req, res) => {
 
 app.post("/todo", auth, async (req, res) => {
     console.log("create a todo post req came");
+
+    const bodySchema = z.object({
+        title: z.string().min(1).refine((t) => t.trim() !== ""),
+        category: z.enum(["private", "public"])
+    });
+
+    const { success, data, error } = bodySchema.safeParse(req.data);
+
+    if (!success) {
+        console.log('we got error while validating the todo', error);
+        res.status(200).json({ErrorMessage: error.issues[0].message})
+    }
+
     const todo = {
         title: req.body.title,
         done: false,
-        userId: req.userId
+        userId: req.userId,
+        category: req.category
     };
     const response = await TodoModel.create(todo);
     console.log(response);

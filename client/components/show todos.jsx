@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import axios from 'axios';
 import { TodoContext } from "./context api";
-import { Trash2, } from 'lucide-react';
+import { Trash2, EllipsisVertical, Tag, Pin, PinOff, GripVertical } from 'lucide-react';
 
 export default function TodoList() {
     const { todos, setTodos } = useContext(TodoContext);
@@ -80,6 +80,9 @@ export default function TodoList() {
                             {todo.title}
                         </label>
                     </div>
+                    <button className="todo-more" onClick={todoMore}>
+
+                    </button>
                     <button className="todo-delete" onClick={() => deleteTodo(todo._id)}>
                         <Trash2 color="var(--text-varient)" />
                     </button>

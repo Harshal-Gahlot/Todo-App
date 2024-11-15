@@ -8,18 +8,20 @@ export default function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const { authMethod, setAuthMethod } = useContext(TodoContext);
+    const { setAuthMethod } = useContext(TodoContext);
 
     async function sendSignupReq(event) {
         event.preventDefault();
         console.log(name, email, password);
         try {
-            const res = await axios.post("https://todo-app-be-0kqo.onrender.com/signup", 
-                { name, email, password });
+            const res = await axios.post(
+                "https://todo-app-be-0kqo.onrender.com/signup",
+                { name, email, password }
+            );
             console.log("res", res);
-            if (res.string() === "OK") {
+            if (res.data.ErrorMessage === "none") {
                 console.log("Sign up success");
-
+                // window.location.reload()
             } else {
                 setErrorMessage(res.data.ErrorMessage);
             }
