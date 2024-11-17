@@ -37,7 +37,7 @@ app.post("/signup", async (req, res) => {
             .min(3, { message: "Name must contain at least 3 characters" })
             .max(100, { message: "Name can contain at most 100 characters" }),
 
-        email: z.string().email().toLowerCase
+        email: z.string().email().toLowerCase()
             .max(100, { message: "Email must contain at most 100 characters" }),
 
         password: z.string()
@@ -86,7 +86,25 @@ app.post("/signup", async (req, res) => {
 
 app.post("/signin", async (req, res) => {
     console.log("signin req came");
-    const { email, password } = req.body;
+    const bodySchema = z.object({
+        email: z.string().email().toLowerCase()
+            .max(100, { message: "Email must contain at most 100 characters" }),
+
+        password: z.string()
+            .min(6, { message: "Password must contain at least 6 characters" })
+            .max(100, { message: "Password can contain at most 100 characters" })
+    });
+
+    const { success, data, error } = bodySchema.safeParse(req.body);
+    console.log('success, data, error', success, data, error);
+
+    if (!success) {
+        console.log("In !success");
+        res.status(200).json({ ErrorMessage: error.issues[0].message });
+        return;
+    }
+
+    const { email, password } = data;
 
     const response = await UserModel.findOne({
         email: email,
@@ -94,7 +112,7 @@ app.post("/signin", async (req, res) => {
 
     if (!response) {
         console.log("User donesn't exist, Sign up?");
-        res.status(404).json({ "message": "User doesn't exist, Sign up?" });
+        res.status(404).json({ ErrorMessage: "User doesn't exist! Sign up insted." });
         return;
     }
 
@@ -107,6 +125,7 @@ app.post("/signin", async (req, res) => {
         });
     }
 
+    console.log("Making token");
     const token = jwt.sign({ id: response._id.toString() }, JWT_SECRET);
     console.log("sign in successful");
     res.status(200).json({ "token": token });
@@ -124,7 +143,7 @@ app.post("/todo", auth, async (req, res) => {
 
     if (!success) {
         console.log('we got error while validating the todo', error);
-        res.status(200).json({ErrorMessage: error.issues[0].message})
+        res.status(200).json({ ErrorMessage: error.issues[0].message });
     }
 
     const todo = {

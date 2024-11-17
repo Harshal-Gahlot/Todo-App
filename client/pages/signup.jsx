@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { TodoContext } from "../components/context api";
 
 export default function Signup() {
-    console.log("in Signup last component");
+    console.log("in Sign up component");
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -48,7 +48,7 @@ export default function Signup() {
                     value={password} onChange={(e) => setPassword(e.target.value)}
                 />
                 <button type="submit" className="auth-form-submit-btn" onClick={sendSignupReq}>Sign up</button>
-                <span className="ErrorInValidatingAuth">{errorMessage}</span>
+                <div className="ErrorInValidatingAuth">{errorMessage}</div>
             </form>
         </div>
     );
