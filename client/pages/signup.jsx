@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { TodoContext } from "../components/context api";
+import { Loader } from "lucide-react";
 
 export default function Signup() {
     console.log("in Sign up component");
@@ -8,12 +9,15 @@ export default function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [reqSendBtnState, setReqSendBtnState] = useState('Sign up')
     const { setAuthMethod } = useContext(TodoContext);
+    const loadingAnime = <Loader className="auth-req-loading"/>
 
     async function sendSignupReq(event) {
         event.preventDefault();
         console.log(name, email, password);
         try {
+            setReqSendBtnState(loadingAnime)
             const res = await axios.post(
                 "https://todo-app-be-0kqo.onrender.com/signup",
                 { name, email, password }
@@ -24,8 +28,10 @@ export default function Signup() {
                 // window.location.reload()
             } else {
                 setErrorMessage(res.data.ErrorMessage);
+                setReqSendBtnState("Sign up")
             }
         } catch (err) {
+            setValidationErrorMessage("Error occured while signing up");
             console.log("error while signing up", err);
         }
     }
@@ -47,7 +53,7 @@ export default function Signup() {
                     id="user-password-signup" placeholder="Password"
                     value={password} onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit" className="auth-form-submit-btn" onClick={sendSignupReq}>Sign up</button>
+                <button type="submit" className="auth-form-submit-btn" onClick={sendSignupReq}>{reqSendBtnState}</button>
                 <div className="ErrorInValidatingAuth">{errorMessage}</div>
             </form>
         </div>

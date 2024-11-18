@@ -67,6 +67,8 @@ export default function TodoList() {
 
     }
 
+    // function todoMore() {    }
+
     return (
         <div className="all-todos" >
             {todos.map((todo) =>
@@ -80,9 +82,7 @@ export default function TodoList() {
                             {todo.title}
                         </label>
                     </div>
-                    <button className="todo-more" onClick={todoMore}>
-
-                    </button>
+                    {/* <button className="todo-more" onClick={todoMore}> </button> */}
                     <button className="todo-delete" onClick={() => deleteTodo(todo._id)}>
                         <Trash2 color="var(--text-varient)" />
                     </button>

@@ -28,6 +28,7 @@ export default function CreateTodo() {
             }, {
                 headers: { token: localStorage.getItem("token") }
             });
+            console.log(res)
             setTodos((pre_todos) => pre_todos.map(todo => todo._id == key ? res.data : todo));
 
         } catch (err) {

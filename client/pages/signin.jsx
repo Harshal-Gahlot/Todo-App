@@ -1,18 +1,22 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { TodoContext } from "../components/context api";
+import { Loader } from "lucide-react";
 
 export default function Signin() {
     console.log("in Sign in component");
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [validationErrorMessage, setValidationErrorMessage] = useState("");
+    const [reqSendBtnState, setReqSendBtnState] = useState('Sign up');
     const { setAuthMethod } = useContext(TodoContext);
+    const loadingAnime = <Loader className="auth-req-loading" />
 
     async function sendSigninReq(event) {
         event.preventDefault();
         console.log("in sendSiginReq", email, password);
         try {
+            setReqSendBtnState(loadingAnime);
             const res = await axios.post(
                 "https://todo-app-be-0kqo.onrender.com/signin",
                 { email, password }
@@ -21,10 +25,12 @@ export default function Signin() {
             if (!res.data.ErrorMessage) {
                 localStorage.setItem("token", res.data.token);
             } else {
+                setReqSendBtnState("Sign in");
                 setValidationErrorMessage(res.data.ErrorMessage);
             }
             // window.location.reload();
         } catch (e) {
+            setValidationErrorMessage("Error occured while signing in");
             console.log(`Error occured: ${e}`);
         }
     }
@@ -42,7 +48,7 @@ export default function Signin() {
                 <input type="password" id="user-password-signin" className="auth-input" placeholder="Password"
                     value={password} onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit" className="auth-form-submit-btn" onClick={sendSigninReq}>Sign in</button>
+                <button type="submit" className="auth-form-submit-btn" onClick={sendSigninReq}>{reqSendBtnState}</button>
                 <span className="ErrorInValidatingAuth">{validationErrorMessage}</span>
             </form>
         </div>

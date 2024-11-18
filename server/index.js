@@ -136,7 +136,7 @@ app.post("/todo", auth, async (req, res) => {
 
     const bodySchema = z.object({
         title: z.string().min(1).refine((t) => t.trim() !== ""),
-        category: z.enum(["private", "public"])
+        category: z.enum(["private", "public"]).optional().default("public")
     });
 
     const { success, data, error } = bodySchema.safeParse(req.data);
