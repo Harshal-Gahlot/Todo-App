@@ -26,7 +26,7 @@ const Todo = new Schema({
     title: { type: String, required: true },
     done: { type: Boolean, required: true },
     userId: { type: ObjectId, required: true },
-    category: { type: String, required: true },
+    category: { type: String, required: true, default: "public" },
     tags: { type: [String], default: [] },
     date: { type: Date, default: Date.now }
 });

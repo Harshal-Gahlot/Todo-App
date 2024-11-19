@@ -1,10 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import { TodoContext } from "./context api";
-import { Trash2, EllipsisVertical, Tag, Pin, PinOff, GripVertical } from 'lucide-react';
+import { Trash2, EllipsisVertical, Tag, Pin, PinOff, GripVertical, Grab } from 'lucide-react';
 
 export default function TodoList() {
     const { todos, setTodos } = useContext(TodoContext);
+    const [todoMore, setTodoMore] = useState(null);
 
     useEffect(() => {
         async function fetchTodos() {
@@ -67,24 +68,39 @@ export default function TodoList() {
 
     }
 
-    // function todoMore() {    }
-
     return (
         <div className="all-todos" >
             {todos.map((todo) =>
                 <div className="single-todo-container" key={todo._id}>
+                    <button className="btnR" style={{cursor:"grab"}}>
+                        < GripVertical />
+                    </button>
                     <input type="checkbox"
                         className="todo-checkbox" id={`todo-checkbox-${todo._id}`}
                         onChange={() => updateTodo(todo._id, { "done": !todo.done })}
                         checked={todo.done} />
                     <div className="todo-title">
-                        <label htmlFor={`todo-checkbox-${todo._id}`} className=" todo-title-text">
+                        <label htmlFor={`todo-checkbox-${todo._id}`} className="todo-title-text" >
                             {todo.title}
                         </label>
                     </div>
-                    {/* <button className="todo-more" onClick={todoMore}> </button> */}
-                    <button className="todo-delete" onClick={() => deleteTodo(todo._id)}>
-                        <Trash2 color="var(--text-varient)" />
+                    <button className="btnR todo-more-btn" onClick={() => setTodoMore(todo.id)}>
+                        {todoMore === todo.id ?
+                            <div className="todo-more-container">
+                                <button className="btnR" onClick={() => updateTodo(todo._id, { "important": !todo.important })}>
+                                    {todo.tag && todo.tag.find(tag => tag === "pin") ? <Pin /> : <PinOff />} 
+                                    <p>Pin to top</p> 
+                                </button>
+                                <button className="btnR todo-tag-btn" onClick={todoMore}>
+                                    < Tag />
+                                    <input type="text" placeholder="Add tag" className="todo-tag-input" />
+                                </button>
+                            </div>
+                        : < EllipsisVertical />}
+                    </button>
+
+                    <button className="btnR" onClick={() => deleteTodo(todo._id)}>
+                        < Trash2 />
                     </button>
                 </div>)
             }

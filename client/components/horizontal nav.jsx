@@ -14,13 +14,13 @@ export default function HorizontalNav() {
     return (
         <nav className='horizontal-nav'>
             <div className="nav-right">
-                <button className="search-btn btn">
+                <button className="btnC">
                     <Search />
                 </button>
-                <button className="btn theme-btn" onClick={changeTheme} >
+                <button className="btnC" onClick={changeTheme} >
                     {localStorage.getItem("theme") === "dark" ? <Moon /> : <Sun />}
                 </button>
-                <button className='profile-btn btn'>
+                <button className='btnC'>
                     <User />
                 </button>
             </div>

@@ -55,7 +55,7 @@
     align-items: center;
     aspect-ratio: 1 / 1;
     padding: 8px;
-    border-radius: 0 8px 8px 0 ;
+    border-radius: 0 8px 8px 0;
 }
 
 .all-todos {
@@ -67,6 +67,10 @@
 
 .single-todo-container {
     display: flex;
+}
+
+.single-todo-container:hover .btnR :first-child {
+    color: var(--text-varient);
 }
 
 .todo-checkbox {
@@ -93,7 +97,7 @@
 
 .todo-title-text {
     position: relative;
-    cursor:pointer;
+    cursor: text;
     font-family: Poppins;
 }
 
@@ -102,16 +106,67 @@
     position: absolute;
     left: 0;
     top: 50%;
-    height: 2px; 
+    height: 2px;
     background-color: currentColor;
-    width: 0; 
-    transition: width 0.5s ease-in-out; 
+    width: 0;
+    transition: width 0.5s ease-in-out;
 }
 
-.todo-delete {
+.todo-more-btn {
+    position: relative;
+    padding: 0px !important;
+    max-width: 100%;
+}
+
+.todo-more-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--base-varient);
+    padding: 4px;
+    gap: 4px;
+    width: 150px;
+    max-width: 150px;
+    border-radius: 4px;
+}
+
+.todo-more-container button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background-color: var(--base-varient);
+    border-radius: 4px;
+}
+
+.todo-more-container button *  {
+    color: var(--text-varient) !important;
+}
+
+.todo-more-container button p {
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+.todo-more-container button:hover {
     background-color: var(--base-color);
-    border: none;
-    padding: 8px;
-    cursor: pointer;
 }
 
+.todo-more-container button:hover input{
+    background-color: var(--base-color) !important;
+}
+
+.todo-tag-input {
+    background-color: var(--base-varient);
+    border: none;
+    max-width: 100%;
+    outline: none;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.todo-tag-btn:hover input {
+    background-color: var(--base-varient) !important;
+}

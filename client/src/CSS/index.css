@@ -34,19 +34,28 @@
     height: 100%;
 }
 
-.btn {
+.btnC {
     background: var(--base-color);
     border: none;
     cursor: pointer;
     display: grid;
-    border-radius: 50%;
     padding: 8px;
+    border-radius: 50%;
 }
 
-.btn :first-child {
-    color:var(--text-color)
+.btnR {
+    background-color: var(--base-color);
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
 }
 
-.btn:hover {
+.btnC :first-child, .btnR :first-child  {
+    color: var(--base-color);
+    align-items: center;
+}
+
+.btnC:hover, .btnR:hover  {
     background-color: var(--base-varient);
 }

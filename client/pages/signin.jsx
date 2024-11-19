@@ -8,7 +8,7 @@ export default function Signin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [validationErrorMessage, setValidationErrorMessage] = useState("");
-    const [reqSendBtnState, setReqSendBtnState] = useState('Sign up');
+    const [reqSendBtnState, setReqSendBtnState] = useState('Sign in');
     const { setAuthMethod } = useContext(TodoContext);
     const loadingAnime = <Loader className="auth-req-loading" />
 
@@ -28,7 +28,7 @@ export default function Signin() {
                 setReqSendBtnState("Sign in");
                 setValidationErrorMessage(res.data.ErrorMessage);
             }
-            // window.location.reload();
+            window.location.reload();
         } catch (e) {
             setValidationErrorMessage("Error occured while signing in");
             console.log(`Error occured: ${e}`);

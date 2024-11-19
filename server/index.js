@@ -112,16 +112,16 @@ app.post("/signin", async (req, res) => {
 
     if (!response) {
         console.log("User donesn't exist, Sign up?");
-        res.status(404).json({ ErrorMessage: "User doesn't exist! Sign up insted." });
+        res.status(200).json({ ErrorMessage: "User doesn't exist! Sign up insted?" });
         return;
     }
 
     const userMached = await bcrypt.compare(password, response.password);
 
     if (!userMached) {
-        console.log("incorrect creds");
+        console.log("Incorrect email or password");
         res.status(403).json({
-            "message": "Incorrect creds"
+            ErrorMessage: "Incorrect email or password."
         });
     }
 
@@ -132,29 +132,30 @@ app.post("/signin", async (req, res) => {
 });
 
 app.post("/todo", auth, async (req, res) => {
-    console.log("create a todo post req came");
+    console.log("create a todo post req came with data", req.body);
 
     const bodySchema = z.object({
         title: z.string().min(1).refine((t) => t.trim() !== ""),
         category: z.enum(["private", "public"]).optional().default("public")
     });
 
-    const { success, data, error } = bodySchema.safeParse(req.data);
+    const { success, data, error } = bodySchema.safeParse(req.body);
+    console.log('success, data, error', success, data, error)
 
     if (!success) {
         console.log('we got error while validating the todo', error);
-        res.status(200).json({ ErrorMessage: error.issues[0].message });
+        res.status(400).json({ ErrorMessage: error.issues[0].message });
     }
 
     const todo = {
-        title: req.body.title,
+        title: data.title,
         done: false,
         userId: req.userId,
-        category: req.category
+        category: data.category
     };
     const response = await TodoModel.create(todo);
     console.log(response);
-    res.json(response);
+    res.status(201).json(response);
 });
 
 app.patch("/todo/:id", auth, async (req, res) => {

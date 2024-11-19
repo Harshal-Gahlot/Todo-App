@@ -25,7 +25,7 @@ export default function Signup() {
             console.log("res", res);
             if (res.data.ErrorMessage === "none") {
                 console.log("Sign up success");
-                // window.location.reload()
+                window.location.reload()
             } else {
                 setErrorMessage(res.data.ErrorMessage);
                 setReqSendBtnState("Sign up")
