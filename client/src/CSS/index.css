@@ -36,6 +36,7 @@
 
 .btnC {
     background: var(--base-color);
+    color: var(--text-varient);
     border: none;
     cursor: pointer;
     display: grid;
@@ -45,6 +46,7 @@
 
 .btnR {
     background-color: var(--base-color);
+    color: var(--text-varient);
     border: none;
     cursor: pointer;
     padding: 8px;
@@ -52,10 +54,11 @@
 }
 
 .btnC :first-child, .btnR :first-child  {
-    color: var(--base-color);
     align-items: center;
+    color: inherit;
 }
 
 .btnC:hover, .btnR:hover  {
     background-color: var(--base-varient);
+    color: var(--text-color);
 }

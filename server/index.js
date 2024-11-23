@@ -161,7 +161,7 @@ app.post("/todo", auth, async (req, res) => {
 app.patch("/todo/:id", auth, async (req, res) => {
     const todoId = req.params.id;
     console.log("\nPATCH req came with todo id:", todoId);
-    id === 'undefined' && res.status(404).json({ "message": "the patch todo's ID was not provided" });
+    todoId == 'undefined' && res.status(404).json({ "message": "the patch todo's ID was not provided" });
 
     const toUpdateTodo = await TodoModel.findById(todoId);
     console.log('before updating toUpdateTodo', toUpdateTodo);
