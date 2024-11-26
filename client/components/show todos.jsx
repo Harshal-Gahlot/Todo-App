@@ -18,10 +18,11 @@ export default function TodoList() {
         setTodos((prev_todos) => prev_todos.map(
             todo => todo._id === todoId ? getUpdatedTodo(todo) : todo
         ));
+
         console.log('todoId, updatedData, outDatedData', todoId, updatedData, outDatedData);
         try {
             await axios.patch(`https://todo-app-be-0kqo.onrender.com/todo/${todoId}`,
-            // await axios.patch(`http://localhost:3000/todo/${todoId}`,
+                // await axios.patch(`http://localhost:3000/todo/${todoId}`,
                 updatedData,
                 {
                     headers: {
@@ -76,7 +77,7 @@ export default function TodoList() {
 
     useEffect(() => {
         function handleClickOutside(event) {
-            console.log("event.target.value in useEffect !!!!!!!!!!!!!!!!!", event.target);
+            console.log("UseEffect, event.target:", event.target);
             if (menuRef.current && !menuRef.current.contains(event.target)) {
                 setTodoMore(null);
             }
@@ -101,22 +102,36 @@ export default function TodoList() {
         const tag = e.target.value.trim();
         console.log("Word complete, tag:", tag, "id:", id);
         if (tag === "") {
-            return; 
+            return;
         }
         e.target.value = "";
         updateTodo(
             id,
-            {"tags": [...todos.find(todo => todo._id === id).tags, tag]}
+            { "tags": [...todos.find(todo => todo._id === id).tags, tag] }
+        );
+    }
+
+    function removeTag(e, id, index) {
+        e.preventDefault();
+        console.log('removeTag req', id, index);
+        const tags = todos.find(todo => todo._id === id).tags;
+        tags.splice(index, 1); // splice starts removeing the item(s) from the (1st arg) idx & removes (2nd arg) n items &
+        console.log('removeTag tag', tags);
+        updateTodo(
+            id,
+            { "tags": tags }
         );
     }
 
     return (
         <div className="all-todos">
             {todos.map((todo) =>
-                <div className="single-todo-container" key={todo._id}>
+                <div key={todo._id} className=
+                    {todo.isPinned ? "pined single-todo-container" : "single-todo-container"}>
                     <button className="btnR" style={{ cursor: "grab" }}>
                         <GripVertical />
                     </button>
+
                     <input type="checkbox"
                         className="todo-checkbox" id={`todo-checkbox-${todo._id}`}
                         onChange={() => updateTodo(todo._id, { "done": !todo.done })}
@@ -124,8 +139,14 @@ export default function TodoList() {
                     <div className="todo-title">
                         <label htmlFor={`todo-checkbox-${todo._id}`} className="todo-title-text">
                             {todo.title}
+                            <ul className="todo-tag-container">
+                                {todo.tags.map((tag, index) =>
+                                    <li key={index} onClick={(e) => removeTag(e, todo._id, index)} className="todo-tag">{tag}</li>
+                                )}
+                            </ul>
                         </label>
                     </div>
+
                     <button className="btnR todo-more-btn" onClick={() => toggleMenu(todo._id)}>
                         {
                             todoMore === todo._id &&
@@ -155,7 +176,6 @@ export default function TodoList() {
                         }
                         <EllipsisVertical />
                     </button>
-
                     <button className="btnR" onClick={() => deleteTodo(todo._id)}>
                         <Trash2 />
                     </button>
