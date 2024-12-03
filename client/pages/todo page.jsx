@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CreateTodo from '../components/create todo';
 import HorizontalNav from '../components/horizontal nav';
-import TodoList from '../components/show todos';
+import TodoList from '../components/todos container';
 
 export default function TodoPage() {
     const [showMenu, setShowMenu] = useState(null);

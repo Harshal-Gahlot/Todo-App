@@ -22,7 +22,7 @@ export default function CreateTodo() {
         const key = `${Date.now()}`;
         try {
             setTitle("");
-            setTodos((pre_todos) => [...pre_todos, { todo_title, "done": false, _id: key }]);
+            setTodos((pre_todos) => [...pre_todos, { todo_title, "done": false, "_id": key, "tags": [], "isPinned": false }]);
             console.log("title:", todo_title);
             const res = await axios.post("https://todo-app-be-0kqo.onrender.com/todo", {
             // const res = awaita axios.post("http://localhost:3000/todo", {

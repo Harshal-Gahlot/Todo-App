@@ -31,7 +31,6 @@ export default function Signup() {
                 setReqSendBtnState("Sign up")
             }
         } catch (err) {
-            setValidationErrorMessage("Error occured while signing up");
             console.log("error while signing up", err);
         }
     }

@@ -55,6 +55,16 @@ app.post("/signup", async (req, res) => {
         return;
     }
 
+    const user = await UserModel.findOne({ "name": data.name });
+    console.log(user)
+    if (user) {
+        res.status(200).json({
+            ErrorMessage: "Name taken"
+        });
+        return;
+    }
+
+    
     try {
         const hashPassword = await bcrypt.hash(data.password, 5);
 
@@ -135,7 +145,7 @@ app.post("/todo", auth, async (req, res) => {
     console.log("create a todo post req came with data", req.body);
 
     const bodySchema = z.object({
-        title: z.string().min(1).refine((t) => t.trim() !== ""),
+        title: z.string().min(1),
         category: z.enum(["private", "public"]).optional().default("public")
     });
 
