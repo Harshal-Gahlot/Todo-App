@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import axios from 'axios';
-import { DndContext, closestCenter } from '@dnd-kit/core';
-import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { DndContext, KeyboardSensor, MouseSensor, PointerSensor, TouchSensor, closestCenter, useSensor, useSensors } from '@dnd-kit/core';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { TodoContext } from "./context api";
 import SingleTodo from "./single todo";
 
@@ -10,11 +10,35 @@ export default function TodoList() {
     const [todoMore, setTodoMore] = useState(null);
     const [dragging, setDragging] = useState(false);
     const menuRef = useRef(null);
+    // const sensors = useSensors(
+    //     useSensor(PointerSensor),
+    //     useSensor(TouchSensor),
+    //     useSensor(KeyboardSensor, {
+    //         coordinateGetter: sortableKeyboardCoordinates
+    //     })
+    // );
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                distance: 8,
+            },
+        }),
+        useSensor(TouchSensor, {
+            activationConstraint: {
+                delay: 200,
+                tolerance: 6,
+            },
+        }),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        }),
+    );
 
     useEffect(() => { // Fetch all todos
         async function fetchTodos() {
             try {
                 const res = await axios.get("https://todo-app-be-0kqo.onrender.com/todos", {
+                // const res = await axios.get("http://localhost:3000/todos", {
                     headers: {
                         token: localStorage.getItem("token")
                     }
@@ -30,6 +54,8 @@ export default function TodoList() {
 
     useEffect(() => { // Close todo menu when clicked outside
         function handleClickOutside(event) {
+            console.log('event', event);
+            console.log(menuRef.current);
             if (menuRef.current && !menuRef.current.contains(event.target)) {
                 setTodoMore(null);
             }
@@ -56,7 +82,7 @@ export default function TodoList() {
     console.log("ReRendered");
 
     return (
-        <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <DndContext collisionDetection={closestCenter} sensors={sensors} onDragEnd={handleDragEnd}>
             <SortableContext items={sortedTodos} strategy={verticalListSortingStrategy}>
                 <div className="all-todos" key="all-todos">
                     {sortedTodos.length > 0 && sortedTodos.map((todo) =>

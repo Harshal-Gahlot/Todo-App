@@ -56,7 +56,7 @@ app.post("/signup", async (req, res) => {
     }
 
     const user = await UserModel.findOne({ "name": data.name });
-    console.log(user)
+    console.log(user);
     if (user) {
         res.status(200).json({
             ErrorMessage: "Name taken"
@@ -64,7 +64,7 @@ app.post("/signup", async (req, res) => {
         return;
     }
 
-    
+
     try {
         const hashPassword = await bcrypt.hash(data.password, 5);
 
@@ -150,7 +150,7 @@ app.post("/todo", auth, async (req, res) => {
     });
 
     const { success, data, error } = bodySchema.safeParse(req.body);
-    console.log('success, data, error', success, data, error)
+    console.log('success, data, error', success, data, error);
 
     if (!success) {
         console.log('we got error while validating the todo', error);
@@ -179,8 +179,8 @@ app.patch("/todo/:id", auth, async (req, res) => {
     Object.assign(toUpdateTodo, req.body);
     console.log('after updating toUpdateTodo', toUpdateTodo);
 
-    await TodoModel.updateOne({ _id: todoId }, toUpdateTodo);
-    res.send("Updated successfully");
+    const data = await TodoModel.updateOne({ _id: todoId }, toUpdateTodo);
+    res.status(200).json({"Updated successfully with data:": data});
 });
 
 app.delete("/todo/:id", auth, async (req, res) => {
