@@ -1,6 +1,6 @@
 import { Moon, Sun, Search, Settings, User } from 'lucide-react';
 import { useContext } from 'react';
-import { TodoContext } from './context api';
+import { TodoContext } from '../../context api';
 
 export default function HorizontalNav() {
     const { theme, setTheme } = useContext(TodoContext);

@@ -1,0 +1,226 @@
+#todo-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    place-content: center;
+    position: relative;
+    /* min-width: 50vw; */
+}
+
+.horizontal-nav {
+    width: 100%;
+    /* height: 50px; */
+}
+
+.nav-right {
+    position: relative;
+    padding: 4px;
+    justify-self: right;
+    display: flex;
+}
+
+#create-show-all-todo-container {
+    width: 50vw;
+}
+
+.create-todo-container {
+    display: flex;
+    align-items: stretch;
+    gap: 4px;
+    /* position: relative; */
+}
+
+#create-todo-title {
+    border-radius: 8px 0 0 8px;
+    background-color: var(--base-varient);
+    color: var(--text-color);
+    font-family: Poppins, sans-serif;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 24px;
+    padding: 8px 20px;
+}
+
+#create-todo-title::placeholder {
+    color: var(--text-varient);
+}
+
+.add-todo {
+    background-color: var(--base-varient);
+    cursor: pointer;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    padding: 8px;
+    border-radius: 0 8px 8px 0;
+}
+
+.all-todos {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.single-todo-container {
+    display: flex;
+}
+
+/* .dragging {
+    background-color: rgb(255, 0, 0) !important;
+    transform: scale(1.05) !important;
+    z-index: 10000 !important; /* Bring to the front
+    transition: transform 500ms ease-in-out !important;
+} 
+*/
+
+.single-todo-container:has(.todo-checkbox[type="checkbox"]:checked) {
+    opacity: 0.7;
+}
+
+.single-todo-container:has(.todo-checkbox[type="checkbox"]:checked)
+    .todo-title {
+    opacity: 0.5;
+}
+
+.single-todo-container:hover .btnR :first-child {
+    color: var(--text-varient);
+}
+
+.todo-checkbox {
+    cursor: pointer;
+    display: none;
+}
+
+.todo-title {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    color: var(--text-color);
+    width: 50vw;
+    padding-left: 10px;
+    position: relative;
+}
+
+.todo-title-text {
+    position: relative;
+    cursor: pointer;
+    font-family: Poppins;
+}
+
+.todo-checkbox[type="checkbox"]:checked + .todo-title {
+    text-decoration: line-through;
+}
+
+.todo-tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    left: 0rem;
+    top: 100%;
+    gap: 12px;
+}
+
+.tag-color-input {
+    opacity: 0;
+    z-index: 10;
+    width: 1.5rem;
+    cursor: crosshair;
+}
+
+.tag-color-input-div {
+    position: relitive;
+    display: flex;
+    align-items: center;
+}
+
+.todo-tag {
+    font-size: 12px;
+    padding: 1px 6px;
+    text-wrap: nowrap;
+    /* background-color: rgba(36, 160, 237, 0.5); */
+    /* outline: 2px solid var(--unique-color); */
+    color: var(--text-color);
+    border-radius: 1rem;
+    margin: none;
+    font-family: poppins;
+}
+
+.todo-more-btn {
+    position: relative;
+    padding: 0px;
+    max-width: 100%;
+}
+
+.todo-more-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--base-varient);
+    padding: 4px;
+    gap: 4px;
+    width: 150px;
+    max-width: 150px;
+    border-radius: 4px;
+}
+
+.todo-more-container li {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    background-color: var(--base-varient);
+    border-radius: 4px;
+}
+
+.todo-more-container li p {
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+.todo-more-container li:hover {
+    background-color: var(--base-color);
+}
+
+.todo-more-container li:hover input {
+    background-color: var(--base-color) !important;
+}
+
+.todo-tag-input {
+    background-color: var(--base-varient);
+    border: none;
+    max-width: 75%;
+    outline: none;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.todo-tag-btn:hover input {
+    background-color: var(--base-varient) !important;
+}
+
+
+
+@media screen and (max-width: 600px) {
+    #create-show-all-todo-container {
+        width: 100vw;
+    }
+
+    .create-todo-container {
+        max-width: 80vw;
+        margin: auto;
+    }
+
+    .single-todo-container {
+        margin: auto;
+    }
+    .todo-title {
+        width: 150000%;
+        padding: 0;
+    }
+}

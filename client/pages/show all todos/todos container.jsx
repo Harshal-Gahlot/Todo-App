@@ -2,8 +2,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import axios from 'axios';
 import { DndContext, KeyboardSensor, MouseSensor, PointerSensor, TouchSensor, closestCenter, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { TodoContext } from "./context api";
-import SingleTodo from "./single todo";
+import { TodoContext } from "../context api";
+import SingleTodo from "./components/single todo";
 
 export default function TodoList() {
     const { todos, setTodos } = useContext(TodoContext);

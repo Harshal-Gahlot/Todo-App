@@ -1,9 +1,9 @@
-import LandingPage from '../pages/landing page';
-import TodoPage from '../pages/todo page';
+import LandingPage from '../pages/landing page/landing page';
+import TodoPage from '../pages/show all todos/todo page';
 import './CSS/index.css';
-import './CSS/landing page.css';
-import './CSS/todos page.css';
-import { TodoProvider } from '../components/context api';
+import '../pages/landing page/landing page.css';
+import '../pages/show all todos/todos page.css';
+import { TodoProvider } from '../pages/context api';
 
 function App() {
 
