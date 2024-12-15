@@ -10,7 +10,6 @@ export default function TodoPage() {
                 <CreateTodo />
                 <TodoList />
             </div>
-
         </div>
     );
 }

@@ -4,7 +4,9 @@ export const TodoContext = createContext();
 
 export function TodoProvider({ children }) {
     !localStorage.getItem("theme") && localStorage.setItem("theme", "light");
+    const currentPageInit = localStorage.getItem("token") ? "TodoPage" : "LandingPage"
 
+    const [currentPage, setCurrentPage] = useState(currentPageInit);
     const [theme, setTheme] = useState(localStorage.getItem("theme"))
     const [todos, setTodos] = useState([]);
     const [authMethod, setAuthMethod] = useState(null);
@@ -16,11 +18,17 @@ export function TodoProvider({ children }) {
 
     return (
         <TodoContext.Provider value={{
+            currentPage, setCurrentPage,
+            theme, setTheme,
             todos, setTodos,
             authMethod, setAuthMethod,
-            theme, setTheme
         }}>
             {children}
         </TodoContext.Provider>
     );
 }
+
+
+
+
+
