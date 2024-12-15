@@ -180,14 +180,14 @@ app.patch("/todo/:id", auth, async (req, res) => {
     console.log('after updating toUpdateTodo', toUpdateTodo);
 
     const data = await TodoModel.updateOne({ _id: todoId }, toUpdateTodo);
-    res.status(200).json({"Updated successfully with data:": data});
+    res.status(200).json({ "Updated successfully with data:": data });
 });
 
 app.delete("/todo/:id", auth, async (req, res) => {
     console.log('delete req came');
     const id = req.params.id;
     console.log('delete todo req came with id', id);
-    id === 'undefined' && res.status(404).json({ "message": "the todo to delete ID isen't provided" });
+    id === 'undefined' && res.status(404).json({ "message": "The ID of todo which is to be deleted isen't provided" });
     const todoToDelete = await TodoModel.findByIdAndDelete({ _id: id });
     res.status(200).send(`todo deleted successfully! ${todoToDelete}`);
 });
@@ -200,6 +200,40 @@ app.get("/todos", auth, async (req, res) => {
     const todos = await TodoModel.find({ userId: userId });
 
     res.json({ todos });
+});
+
+app.get("/profile/:userName", async (req, res) => {
+    const userName = req.params.userName;
+    console.log('\n\nget user req came with name:', userName);
+    const data = await UserModel.find({ name: userName });
+
+    // console.log('data', data);
+    if (data.length === 0) {
+        res.status(200).json({ ErrorMessage: "User not found" });
+        return;
+    }
+
+    let editable = false;
+    try {
+        const token = req.headers.token;
+        const decodedData = jwt.verify(token, JWT_SECRET);
+        if (decodedData) {
+            if (decodedData.id === data._id) editable = true;
+        }
+    } catch {
+        console.log("Profiler viewer can't edit it");
+    }
+
+    const userData = {
+        "links": data[0].userData.links,
+        "bio": data[0].userData.bio,
+        "date": data[0].date
+    };
+
+    console.log(userData);
+    console.log('editable', editable);
+    res.status(200).json({ userData, editable });
+
 });
 
 console.timeEnd("Server Started...");
