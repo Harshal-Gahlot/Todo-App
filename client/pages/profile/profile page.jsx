@@ -43,12 +43,11 @@ export default function ProfilePage() {
         return <h1>{error}</h1>;
     }
 
-
     return (
         <div id="profile-container" onstart>
             <div className="left">
                 <div className="pfp-container">
-                    <img src="" alt="" />
+                    <img src={userData.pfp} alt="pfp" width={250} style={{borderRadius:"100%"}}/>
                 </div>
                 <h1 className="name">{String(params.username)}</h1>
                 <button className="view-following">following</button>

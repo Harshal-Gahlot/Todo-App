@@ -5,7 +5,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import TodoMoreContainer from "./todo more container";
 
-export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setTodoMore, menuRef, dragging, setDragging }) {
+export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setTodoMore, dragging, setDragging }) {
 
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: todo._id });
 
@@ -118,7 +118,6 @@ export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setT
             <button className="btnR todo-more-btn" onClick={() => moreTodoBtn(todo._id)}>
                 {todoMore === todo._id &&
                     < TodoMoreContainer
-                        menuRef={menuRef}
                         todo={todo}
                         sortedTodos={sortedTodos}
                         updateTodo={updateTodo}

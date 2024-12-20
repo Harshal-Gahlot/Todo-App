@@ -18,17 +18,19 @@ export default function Signin() {
         try {
             setReqSendBtnState(loadingAnime);
             const res = await axios.post(
-                "https://todo-app-be-0kqo.onrender.com/signin",
+                // "https://todo-app-be-0kqo.onrender.com/signin",
+                "http://localhost:3000/signin",
                 { email, password }
             );
             console.log("res", res);
             if (!res.data.ErrorMessage) {
                 localStorage.setItem("token", res.data.token);
+                localStorage.setItem("firstLogin", true);
+                window.location.reload();
             } else {
                 setReqSendBtnState("Sign in");
                 setValidationErrorMessage(res.data.ErrorMessage);
             }
-            window.location.reload();
         } catch (e) {
             setValidationErrorMessage("Error occured while signing in");
             console.log(`Error occured: ${e}`);

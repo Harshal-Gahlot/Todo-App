@@ -19,10 +19,14 @@ console.log("importing zod...");
 const { z } = require("zod");
 console.log("importing cors...");
 const cors = require("cors");
+console.log("importing UTApi...");
+const { UTApi } = require('uploadthing/server');
 
-console.log("libs imported");
+console.log("all libs imported"); 
+
 mongoose.connect(process.env.MONGODB_URL);
 const PORT = process.env.PORT;
+const UPLOADTHING_TOKEN = process.env.UPLOADTHING_TOKEN;
 
 const app = express();
 app.use(express.json());
@@ -130,15 +134,29 @@ app.post("/signin", async (req, res) => {
 
     if (!userMached) {
         console.log("Incorrect email or password");
-        res.status(403).json({
+        res.status(200).json({
             ErrorMessage: "Incorrect email or password."
         });
+        return;
     }
 
     console.log("Making token");
     const token = jwt.sign({ id: response._id.toString() }, JWT_SECRET);
     console.log("sign in successful");
     res.status(200).json({ "token": token });
+});
+
+app.patch("/profile", auth, async (req, res) => {
+    console.log("profile post req came with data", req.body);
+
+    const userProfile = await UserModel.findById(req.userId);
+    console.log('before updating userProfile', userProfile);
+
+    Object.assign(userProfile.userData, req.body);
+    console.log('after updating userProfile', userProfile);
+    
+    const data = await UserModel.updateOne({ _id: req.userId }, userProfile);
+    res.status(200).json({ "Updated successfully with data:": data });    
 });
 
 app.post("/todo", auth, async (req, res) => {
@@ -175,7 +193,7 @@ app.patch("/todo/:id", auth, async (req, res) => {
 
     const toUpdateTodo = await TodoModel.findById(todoId);
     console.log('before updating toUpdateTodo', toUpdateTodo);
-    // Don't exist catch
+    // todo id donesn't exist catch ?
     Object.assign(toUpdateTodo, req.body);
     console.log('after updating toUpdateTodo', toUpdateTodo);
 
@@ -227,6 +245,7 @@ app.get("/profile/:userName", async (req, res) => {
     const userData = {
         "links": data[0].userData.links,
         "bio": data[0].userData.bio,
+        "pfp": data[0].userData.pfp,
         "date": data[0].date
     };
 
@@ -234,6 +253,21 @@ app.get("/profile/:userName", async (req, res) => {
     console.log('editable', editable);
     res.status(200).json({ userData, editable });
 
+});
+
+// Endpoint to fetch uploaded images
+app.get('/api/uploaded-images', async (req, res) => {
+    try {
+        const apiKey = UPLOADTHING_TOKEN;
+        const utapi = new UTApi({ apiKey });
+
+        const response = await utapi.listFiles();
+        console.log('response', response)
+        res.status(200).json(response.files);
+    } catch (error) {
+        console.error('Error fetching uploaded images:', error);
+        res.status(500).json({ error: 'Failed to fetch uploaded images' });
+    }
 });
 
 console.timeEnd("Server Started...");

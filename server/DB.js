@@ -18,6 +18,7 @@ const User = new Schema({
             YT: { type: String, default: "" },
             Insta: { type: String, default: "" }
         },
+        pfp: { type: String, default: "" }
     },
     date: { type: Date, default: Date.now }
 });

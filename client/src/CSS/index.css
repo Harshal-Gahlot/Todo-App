@@ -12,12 +12,12 @@
     --unique-color: #24a0ed;
     --unique-color-light-1: #8fd3fe;
     --unique-color-light-2: #75d6ff;
-    --common-color: #cfd2cd;
+    --base-contrast: #333;
 }
 
 .light {
     --base-color: #fff;
-    --base-varient: #c0c0c0c0;
+    --base-varient: #ddd;
     --text-color: #000;
     --text-varient: #222;
     --unique-color: #24a0ed;

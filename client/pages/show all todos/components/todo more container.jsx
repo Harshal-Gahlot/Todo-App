@@ -1,8 +1,11 @@
 import { Tag, Pin, PinOff } from 'lucide-react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import useClosePopupOutside from '../../../utils/close outside click';
 
-export default function TodoMoreContainer({ menuRef, todo, updateTodo, sortedTodos, setTodoMore }) {
+export default function TodoMoreContainer({ todo, updateTodo, sortedTodos, setTodoMore }) {
     const [tagColor, setTagColor] = useState(localStorage.getItem("lastTagColor") ? localStorage.getItem("lastTagColor") : `var(--unique-color)`);
+    const menuRef = useRef(null);
+    useClosePopupOutside(menuRef, setTodoMore, null);
 
     function pinHandler(event) {
         updateTodo(todo._id, { "isPinned": !todo.isPinned });

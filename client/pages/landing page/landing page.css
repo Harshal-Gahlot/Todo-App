@@ -18,7 +18,7 @@
     font-size: 6.8vw;
     font-family: caveat;
     color: var(--text-color);
-    cursor:default;
+    cursor: default;
 }
 
 #landing-page-left p {
@@ -80,6 +80,7 @@
     height: fit-content;
     width: min-content;
     padding-bottom: 3rem;
+    padding-top: 4rem;
 }
 
 .auth-input {
@@ -99,6 +100,7 @@
 }
 .auth-input:focus {
     outline: none;
+    border-bottom: 2px solid var(--unique-color);
 }
 
 .auth-label {
@@ -144,7 +146,7 @@
     color: red;
     text-align: center;
     position: absolute;
-    top: 80%;
+    top: 85%;
     /* margin: 0 1rem; */
 }
 

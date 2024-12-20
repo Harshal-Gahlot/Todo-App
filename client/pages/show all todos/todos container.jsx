@@ -9,7 +9,6 @@ export default function TodoList() {
     const { todos, setTodos } = useContext(TodoContext);
     const [todoMore, setTodoMore] = useState(null);
     const [dragging, setDragging] = useState(false);
-    const menuRef = useRef(null);
     // const sensors = useSensors(
     //     useSensor(PointerSensor),
     //     useSensor(TouchSensor),
@@ -52,20 +51,6 @@ export default function TodoList() {
         fetchTodos();
     }, [localStorage.getItem("token"),]);
 
-    useEffect(() => { // Close todo menu when clicked outside
-        function handleClickOutside(event) {
-            console.log('event', event);
-            console.log(menuRef.current);
-            if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setTodoMore(null);
-            }
-        }
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
-
     function handleDragEnd(event) {
         console.log(event);
         const { active, over } = event;
@@ -93,7 +78,6 @@ export default function TodoList() {
                             todoMore={todoMore}
                             setTodos={setTodos}
                             setTodoMore={setTodoMore}
-                            menuRef={menuRef}
                             dragging={dragging}
                             setDragging={setDragging}
                         />
