@@ -204,8 +204,6 @@
     background-color: var(--base-varient) !important;
 }
 
-
-
 @media screen and (max-width: 600px) {
     #create-show-all-todo-container {
         width: 100vw;
@@ -222,5 +220,23 @@
     .todo-title {
         width: 150000%;
         padding: 0;
+    }
+}
+
+@media (max-width: 390px) {
+    #create-todo-title {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 350px) {
+    #create-todo-title {
+        font-size: 18px;
+    }
+    .todo-title-text {
+        font-size: 20px;
+    }
+    .todo-tag {
+        font-size: 10px;
     }
 }

@@ -234,19 +234,23 @@ app.get("/profile/:userName", async (req, res) => {
     let editable = false;
     try {
         const token = req.headers.token;
+        console.log('token', token);
         const decodedData = jwt.verify(token, JWT_SECRET);
+        console.log('decodedData', decodedData);
         if (decodedData) {
-            if (decodedData.id === data._id) editable = true;
+            if (decodedData.id === String(data[0]._id)) editable = true;
         }
-    } catch {
-        console.log("Profiler viewer can't edit it");
+    } catch (error) { 
+        console.log("Profiler viewer can't edit it", error);
     }
 
     const userData = {
         "links": data[0].userData.links,
         "bio": data[0].userData.bio,
         "pfp": data[0].userData.pfp,
-        "date": data[0].date
+        "date": data[0].date,
+        "followers": data[0].followers,
+        "following": data[0].following,
     };
 
     console.log(userData);

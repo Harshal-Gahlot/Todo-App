@@ -26,8 +26,11 @@
     --common-color: #333;
 }
 
-#app-root-container {
+body, #app-root-container {
     background-color: var(--base-color);
+}
+
+#app-root-container {
     color: var(--text-color);
     width: 100%;
     min-height:100vh;

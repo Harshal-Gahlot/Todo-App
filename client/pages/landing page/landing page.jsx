@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import Signup from "./components/signup";
 import Signin from "./components/signin";
 import { TodoContext } from "../context api";
+import './landing page.css';
 
 export default function LandingPage() {
     const { authMethod, setAuthMethod } = useContext(TodoContext);

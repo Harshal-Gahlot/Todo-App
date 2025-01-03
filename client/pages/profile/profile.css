@@ -1,0 +1,147 @@
+body:has(#profile-container),
+#app-root-container:has(#profile-container) {
+    background-color: var(--base-varient);
+    margin: auto;
+}
+
+#profile-container {
+    border-radius: 2rem;
+    background-color: var(--base-color);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    padding-top: 3rem;
+    gap: 8px;
+    position: relative;
+    justify-content: center;
+    max-width: 350px;
+}
+
+.left::after {
+    content: '';
+    position: absolute;
+    right: -9px;
+    width: 1px;
+    height: 86%;
+    opacity: 0.5;
+    background-color: var(--text-varient);
+}
+
+.pfp-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.pfp {
+    border-radius: 100%;
+    max-width: 250px;
+    min-width: 50px;
+    /* mix-blend-mode:hard-light; */
+}
+
+.name {
+    display: inline;
+    margin: auto;
+    font-family: caveat;
+}
+
+.view-follow-container {
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+
+.view-follow {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    color: var(--text-varient);
+    gap: 4px;
+    padding: 0 0.5rem;
+}
+
+button.view-follow:hover {
+    color: var(--unique-color);
+}
+
+.follow-icons {
+    width: 16px;
+}
+
+.edit-or-follow-btn {
+    margin: auto;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: none;
+    background-color: var(--text-varient);
+    color: var(--base-color);
+    cursor: pointer;
+}
+
+.follow-btn {
+    background-color: var(--unique-color);
+}
+
+.edit-or-follow-btn:hover {
+    background-color: var(--text-color);
+}
+
+.social-media-links {
+    display: flex;
+    list-style-type: none;
+    margin: auto;
+}
+
+.social-media-links li {
+    padding: 0.5rem 0.5rem 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+.social-media-links li:hover {
+    background-color: var(--base-varient);
+}
+
+.social-media-svg {
+    color: var(--text-varient);
+}
+
+.social-media-links li:hover .social-media-svg {
+    color: var(--text-color);
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 3rem;
+}
+
+@media screen and (max-width: 1200px) {
+    #profile-container {
+        margin: 2rem;
+    }
+    
+}
+
+@media (max-width:800px) {
+    #profile-container {
+        grid-template-columns: 1fr;
+    }
+
+    .left {
+        max-width: none;
+    }
+
+    .left::after {
+        opacity: 0;
+    }
+}

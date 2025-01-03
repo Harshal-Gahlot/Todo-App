@@ -7,6 +7,8 @@ const User = new Schema({
     name: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
+    followers: { type: [ObjectId], default: [] },
+    following: { type: [ObjectId], default: [] },
     userData: {
         bio: { type: String, default: "", maxlenght: 220 },
         links: {
@@ -18,7 +20,7 @@ const User = new Schema({
             YT: { type: String, default: "" },
             Insta: { type: String, default: "" }
         },
-        pfp: { type: String, default: "" }
+        pfp: { type: String, default: "4KyPfbMtfhiMv7QSoSGW4s6dc50UKVtONHrZ7XyTuL8nveGj" }
     },
     date: { type: Date, default: Date.now }
 });

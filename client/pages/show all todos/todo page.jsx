@@ -3,6 +3,7 @@ import HorizontalNav from './components/horizontal nav';
 import TodoList from './todos container';
 import AvatarSelection from '../avatar/avatar selection';
 import { useEffect, useState } from 'react';
+import './todos page.css'
 
 export default function TodoPage() {
     const [showAvatarSelection, setShowAvatarSelection] = useState(false);
