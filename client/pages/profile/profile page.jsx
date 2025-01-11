@@ -135,8 +135,7 @@ export default function ProfilePage() {
                         <ReactMarkdown>{userData.bio}</ReactMarkdown>
                     </div>
                 </div>
-            </div >
-            <div />
-        </div >
+            </div>
+        </div>
     );
 };

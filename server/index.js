@@ -143,7 +143,7 @@ app.post("/signin", async (req, res) => {
     console.log("Making token");
     const token = jwt.sign({ id: response._id.toString() }, JWT_SECRET);
     console.log("sign in successful");
-    res.status(200).json({ "token": token });
+    res.status(200).json({ token, username: response.name });
 });
 
 app.patch("/profile", auth, async (req, res) => {

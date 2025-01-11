@@ -1,7 +1,7 @@
 import CreateTodo from './components/create todo';
-import HorizontalNav from './components/horizontal nav';
 import TodoList from './todos container';
 import AvatarSelection from '../avatar/avatar selection';
+import Nav from '../nav/nav';
 import { useEffect, useState } from 'react';
 import './todos page.css'
 
@@ -17,8 +17,9 @@ export default function TodoPage() {
 
     return (
         <>
+        <div className="display-flex">
+            <Nav />
             <div id="todo-page">
-                < HorizontalNav />
 
                 <div id='create-show-all-todo-container'>
                     < CreateTodo />
@@ -26,6 +27,7 @@ export default function TodoPage() {
                 </div>
             </div>
             {showAvatarSelection && < AvatarSelection setShowAvatarSelection={setShowAvatarSelection} />}
+        </div>
         </>
     );
 }

@@ -5,6 +5,8 @@ body:has(#profile-container),
 }
 
 #profile-container {
+    flex-grow: 1;
+    /* flex-basis: 1200px; */
     border-radius: 2rem;
     background-color: var(--base-color);
     display: grid;
@@ -12,22 +14,28 @@ body:has(#profile-container),
     gap: 1rem;
     max-width: 1200px;
     margin: 2rem auto;
+    height: min-content;
+}
+
+.display-flex {
+    display: flex;
+    /* margin: auto; */
 }
 
 .left {
     display: flex;
     flex-direction: column;
-    padding-top: 3rem;
+    padding: 3rem 0;
     gap: 8px;
     position: relative;
     justify-content: center;
-    max-width: 350px;
+    /* max-width: 350px; */
 }
 
 .left::after {
     content: '';
     position: absolute;
-    right: -9px;
+    right: 0px;
     width: 1px;
     height: 86%;
     opacity: 0.5;

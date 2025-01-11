@@ -26,6 +26,7 @@ export default function Signin() {
             if (!res.data.ErrorMessage) {
                 localStorage.setItem("token", res.data.token);
                 localStorage.setItem("firstLogin", true);
+                localStorage.setItem("username", res.data.username);
                 window.location.reload();
             } else {
                 setReqSendBtnState("Sign in");
