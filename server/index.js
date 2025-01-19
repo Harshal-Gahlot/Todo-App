@@ -22,7 +22,7 @@ const cors = require("cors");
 console.log("importing UTApi...");
 const { UTApi } = require('uploadthing/server');
 
-console.log("all libs imported"); 
+console.log("all libs imported");
 
 mongoose.connect(process.env.MONGODB_URL);
 const PORT = process.env.PORT;
@@ -154,9 +154,23 @@ app.patch("/profile", auth, async (req, res) => {
 
     Object.assign(userProfile.userData, req.body);
     console.log('after updating userProfile', userProfile);
-    
+
     const data = await UserModel.updateOne({ _id: req.userId }, userProfile);
-    res.status(200).json({ "Updated successfully with data:": data });    
+    res.status(200).json({ "Updated successfully with data:": data });
+});
+
+app.get("/userNameSearch/:searchTerm", async (req, res) => {
+    try {
+        const searchTerm = req.params.searchTerm;
+        console.log('searchTerm', searchTerm);
+        const matchingUsers = await UserModel.find({
+            name: { $regex: searchTerm, $options: 'i' }
+        }).select('name following followers userData');
+        res.status(200).json({ matchingUsers });
+    } catch (e) {
+        console.log("Error while searching users with name pattern:", e);
+        res.status(400).json({ "Error while searching users with name pattern": e });
+    }
 });
 
 app.post("/todo", auth, async (req, res) => {
@@ -227,7 +241,8 @@ app.get("/profile/:userName", async (req, res) => {
 
     // console.log('data', data);
     if (data.length === 0) {
-        res.status(200).json({ ErrorMessage: "User not found" });
+        console.log("user profile not found")
+        res.status(404).json({ ErrorMessage: "User not found" });
         return;
     }
 
@@ -240,7 +255,7 @@ app.get("/profile/:userName", async (req, res) => {
         if (decodedData) {
             if (decodedData.id === String(data[0]._id)) editable = true;
         }
-    } catch (error) { 
+    } catch (error) {
         console.log("Profiler viewer can't edit it", error);
     }
 
@@ -251,6 +266,7 @@ app.get("/profile/:userName", async (req, res) => {
         "date": data[0].date,
         "followers": data[0].followers,
         "following": data[0].following,
+        "name": data[0].name,
     };
 
     console.log(userData);
@@ -266,11 +282,39 @@ app.get('/api/uploaded-images', async (req, res) => {
         const utapi = new UTApi({ apiKey });
 
         const response = await utapi.listFiles();
-        console.log('response', response)
+        console.log('response', response);
         res.status(200).json(response.files);
     } catch (error) {
         console.error('Error fetching uploaded images:', error);
         res.status(500).json({ error: 'Failed to fetch uploaded images' });
+    }
+});
+
+app.patch('/api/follow/:followerName', auth, async (req, res) => {
+    const followerName = req.params.followerName;
+    console.log('follow req came with userName', followerName);
+
+    const userId = req.userId;
+    console.log('userId', userId);
+
+    const user = await UserModel.findOne({ name: followerName });
+    if (!user) {
+        console.log("User not found");
+        res.status(204).send("User not found");
+        return;
+    } else if (user._id.toString() === userId) {
+        console.log("You can't follow yourself");
+        res.status(200).send("You can't follow yourself");
+        return;
+    } else if (user.followers.includes(userId)) {
+        console.log("Unfollowing user");
+        await UserModel.updateOne({ name: followerName }, { $pull: { followers: userId } });
+        res.status(200).send("unfollowed");
+        return;
+    } else {
+        console.log("Following user");
+        await UserModel.updateOne({ name: followerName }, { $push: { followers: userId } });
+        res.status(200).send("followed");
     }
 });
 

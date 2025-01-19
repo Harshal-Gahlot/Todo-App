@@ -33,7 +33,7 @@ body:has(#profile-container),
 }
 
 .left::after {
-    content: '';
+    content: "";
     position: absolute;
     right: 0px;
     width: 1px;
@@ -133,14 +133,28 @@ button.view-follow:hover {
     padding: 3rem;
 }
 
+.svg-404-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.svg-404 {
+    max-width: 50vw;
+    max-height: 50vh;
+    background-color: #deb88799;
+    border-radius: 12px;
+    filter: invert(1);
+}
+
 @media screen and (max-width: 1200px) {
     #profile-container {
         margin: 2rem;
     }
-    
 }
 
-@media (max-width:800px) {
+@media (max-width: 800px) {
     #profile-container {
         grid-template-columns: 1fr;
     }
@@ -152,4 +166,10 @@ button.view-follow:hover {
     .left::after {
         opacity: 0;
     }
+
+    .svg-404 {
+    max-width: 90vw;
+    max-height: 50vh;
+}
+
 }

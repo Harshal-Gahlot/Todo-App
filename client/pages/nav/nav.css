@@ -6,8 +6,13 @@
     color: var(--text-varient);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 8px 0px;
-    height: 100vh;
+    height: 100dvh;
     width: 50px;
+    /* display: none; */
+}
+
+.nav-top {
+    margin-top: 20px;
 }
 
 #nav-component .nav-items {
@@ -17,6 +22,101 @@
     gap: 8px;
     color: var(--text-varient);
     transition: background-color 0.3s;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 200px;
+    gap: 20px;
+    position: relative;
+}
+
+.search-icon-container {
+    display: flex;
+    align-items: center;
+    border-radius: 8px 0 0 8px;
+    padding: 4px 12px 4px 4px;
+    margin-left: 6px;
+    z-index: 99999999;
+}
+
+.curve-border-style-container {
+    z-index: 999;
+    height: 25px;
+    width: 25px;
+    top: 35px;
+    position: absolute;
+    right: 0px;
+    background-color: var(--base-varient);
+    /* border-radius: 8px 0 0 8px; */
+}
+
+.curve-border-style {
+    width: 25px;
+    height: 25px;
+    display: block;
+    background-color: var(--base-color);
+    border-top-right-radius: 12px;
+    /* border: 12px solid transparent;
+    border-left-color: #0f0;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    z-index: 999; */
+}
+
+.search-box-container {
+    position: absolute;
+    left: 0px;
+    height: 100%;
+    max-width: 250px;
+}
+
+.search-name-input {
+    z-index: 99;
+    position: absolute;
+    left: 50px;
+    height: 100%;
+    border: none;
+    border-bottom: 2px solid black;
+    border-radius-top-right: 8px;
+    color: var(--text-color);
+    background-color: var(--base-varient);
+    outline: none;
+    border-radius: 0 8px 0 0;
+    font-size: larger;
+    max-width: 250px;
+    width: 250px;
+    padding: 0 8px 0 0;
+
+    /* outline: 4px solid var(--base-color); */
+}
+
+.search-results-box {
+    position: absolute;
+    top: 36px;
+    left: 50px;
+    z-index: 99;
+    min-width: 250px;
+    max-width: 250px;
+    color: var(--text-color);
+    background-color: var(--base-varient);
+    border-radius: 0 0 8px 8px;
+    /* height: 25px; */
+    /* bottom: calc(-60px); */
+}
+
+.search-results-box li {
+    list-style: none;
+    padding: 2px 2ch;
+    cursor: pointer;
+    /* border-bottom:  ; */
+}
+
+.search-results-box li:last-child {
+    border-radius: 8px;
 }
 
 .nav-items .btnC {
@@ -33,3 +133,21 @@
     height: 40px;
     width: 40px;
 }
+
+/* @media screen and (max-width: 425px) { */
+/* #nav-component::before {
+        width: 28px;
+        content: "";
+        height: 28px;
+        color: var(--text-varient);
+        background-image: url(/burger-menu.svg);
+        fill: aqua;
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: inline-block;
+    } */
+
+/* #nav-component { */
+/* display: none; */
+/* } */
+/* } */

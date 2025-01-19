@@ -18,8 +18,8 @@ export default function Signin() {
         try {
             setReqSendBtnState(loadingAnime);
             const res = await axios.post(
-                // "https://todo-app-be-0kqo.onrender.com/signin",
-                "http://localhost:3000/signin",
+                "https://todo-app-be-0kqo.onrender.com/signin",
+                // "http://localhost:3000/signin",
                 { email, password }
             );
             console.log("res", res);
@@ -37,7 +37,6 @@ export default function Signin() {
             console.log(`Error occured: ${e}`);
         }
     }
-
     return (
         <div className="auth-form-bg" onClick={() => setAuthMethod(null)}>
             <form id="signin-container" className="auth-form-container"

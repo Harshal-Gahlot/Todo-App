@@ -1,8 +1,9 @@
-import { Moon, Sun, Search, Settings, User } from 'lucide-react';
+import { Moon, Sun, Settings, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { TodoContext } from '../context api';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useLocation, matchPath } from 'react-router-dom';
+import SearchComponent from './components/searchComponent';
 import "./nav.css";
 
 export default function Nav() {
@@ -13,6 +14,7 @@ export default function Nav() {
     const isProfilePage = matchPath("/profile/*", currentURL);
     const isTodoPage = matchPath("/", currentURL);
 
+
     function changeTheme() {
         const toTheme = theme === "light" ? "dark" : "light";
         localStorage.setItem("theme", toTheme);
@@ -21,10 +23,10 @@ export default function Nav() {
 
     return (
         <div id="nav-component">
-            <div className="top nav-items">
-                <Search className="nav-icon" />
+            <div className="nav-top">
+                <SearchComponent />
             </div>
-            <div className="bottom nav-items">
+            <div className="nav-bottom nav-items">
                 {isTodoPage ?
                     <Link className='btnC' to={`/profile/${localStorage.getItem("username")}`}>
                         <User className='nav-icon' />
@@ -37,7 +39,8 @@ export default function Nav() {
                 <button className="btnC" onClick={changeTheme} >
                     {localStorage.getItem("theme") === "dark" ? <Moon className='nav-icon' /> : <Sun className='nav-icon' />}
                 </button>
-                {/* <Settings className="nav-icon" /> */}
+                {/* <Settings className="nav-icon settings" /> */}
+                {/* {window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light'} */}
             </div>
         </div>
     );
