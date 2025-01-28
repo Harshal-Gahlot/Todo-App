@@ -25,6 +25,7 @@ export default function Nav() {
         <div id="nav-component">
             <div className="nav-top">
                 <SearchComponent />
+                {/* #TODO: fix UI and make it look good with background and responsive */}
             </div>
             <div className="nav-bottom nav-items">
                 {isTodoPage ?

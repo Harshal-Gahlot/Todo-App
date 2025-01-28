@@ -17,7 +17,9 @@ export default function ProfilePage() {
         console.log('profilePage mounted with name::::::::::::::', params.username);
         async function getProfileData() {
             try {
-                const res = await axios.get(`http://localhost:3000/profile/${params.username}`,
+                const res = await axios.get(
+                    `https://todo-app-be-0kqo.onrender.com/profile/${params.username}`,
+                    // `http://localhost:3000/profile/${params.username}`,
                     { headers: { token: localStorage.getItem("token") } }
                 );
                 console.log(res);
@@ -50,7 +52,10 @@ export default function ProfilePage() {
     function addFollower() {
         console.log(userData);
         try {
-            axios.patch(`http://localhost:3000/api/follow/${userData.name}`, {}, {
+            axios.patch(
+                `https://todo-app-be-0kqo.onrender.com/api/follow/${userData.name}`,
+                // `http://localhost:3000/api/follow/${userData.name}`,
+                {}, {
                 headers: {
                     token: localStorage.getItem("token"),
                 },
@@ -96,6 +101,7 @@ export default function ProfilePage() {
                         <button className={`edit-or-follow-btn ${!editable && "follow-btn"}`}
                             onClick={editable ? handleEditProfile : addFollower}>
                             {editable ? "Edit Profile" : "Follow"}
+                            {/* #TODO: follow/unfloow UI */}
                         </button>
                         <ul className="social-media-links">
                             {userData?.links?.site && (

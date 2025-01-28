@@ -36,8 +36,9 @@ export default function TodoList() {
     useEffect(() => { // Fetch all todos
         async function fetchTodos() {
             try {
-                const res = await axios.get("https://todo-app-be-0kqo.onrender.com/todos", {
-                // const res = await axios.get("http://localhost:3000/todos", {
+                const res = await axios.get(
+                    "https://todo-app-be-0kqo.onrender.com/todos", {
+                // "http://localhost:3000/todos", {
                     headers: {
                         token: localStorage.getItem("token")
                     }

@@ -36,8 +36,9 @@ export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setT
 
         console.log('\ntodoId:', todoId, '\nupdatedData:', updatedData, '\noutDatedData:', outDatedData);
         try {
-            const res = await axios.patch(`https://todo-app-be-0kqo.onrender.com/todo/${todoId}`,
-            // const res = await axios.patch(`http://localhost:3000/todo/${todoId}`,
+            const res = await axios.patch(
+                `https://todo-app-be-0kqo.onrender.com/todo/${todoId}`,
+            // `http://localhost:3000/todo/${todoId}`,
                 updatedData,
                 {
                     headers: {

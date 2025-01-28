@@ -19,8 +19,8 @@ export default function Signup() {
         try {
             setReqSendBtnState(loadingAnime)
             const res = await axios.post(
-                // "https://todo-app-be-0kqo.onrender.com/signup",
-                "http://localhost:3000/signup",
+                "https://todo-app-be-0kqo.onrender.com/signup",
+                // "http://localhost:3000/signup",
                 { name, email, password }
             );
             console.log("res", res);

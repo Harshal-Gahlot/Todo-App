@@ -24,8 +24,9 @@ export default function CreateTodo() {
             setTitle("");
             setTodos((pre_todos) => [...pre_todos, { todo_title, "done": false, "_id": key, "tags": [], "isPinned": false }]);
             console.log("title:", todo_title);
-            const res = await axios.post("https://todo-app-be-0kqo.onrender.com/todo", {
-            // const res = awaita axios.post("http://localhost:3000/todo", {
+            const res = await axios.post(
+                "https://todo-app-be-0kqo.onrender.com/todo", {
+            // "http://localhost:3000/todo", {
                 title: todo_title, category: "public"
             }, {
                 headers: { token: localStorage.getItem("token") }
