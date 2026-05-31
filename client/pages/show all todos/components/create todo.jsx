@@ -21,7 +21,7 @@ export default function CreateTodo() {
         const todo_title = title;
         const key = `${Date.now()}`;
         try {
-            setTitle("");
+            setTitle(""); // TODO: is this really needed?
             setTodos((pre_todos) => [...pre_todos, { todo_title, "done": false, "_id": key, "tags": [], "isPinned": false }]);
             console.log("title:", todo_title);
             const res = await axios.post(
