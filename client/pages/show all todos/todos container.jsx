@@ -35,6 +35,7 @@ export default function TodoList() {
 
     useEffect(() => { // Fetch all todos
         async function fetchTodos() {
+            // TODO: Missing Loading & Error States
             try {
                 const res = await axios.get(
                     "https://todo-app-be-0kqo.onrender.com/todos", {
@@ -64,8 +65,8 @@ export default function TodoList() {
         setTodos(arrayMove(sortedTodos, oldIndex, newIndex));
     }
 
-    const sortedTodos = [...todos].sort((a, b) => b.isPinned - a.isPinned);
-    console.log("ReRendered");
+    const sortedTodos = [...todos].sort((a, b) => b.isPinned - a.isPinned); // TODO: Memoize sorting 
+    console.log("ReRendered"); 
 
     return (
         <DndContext collisionDetection={closestCenter} sensors={sensors} onDragEnd={handleDragEnd}>

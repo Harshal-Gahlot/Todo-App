@@ -7,11 +7,13 @@ import SearchComponent from './components/searchComponent';
 import "./nav.css";
 
 export default function Nav() {
-
     const { theme, setTheme } = useContext(TodoContext);
     const currentURL = useLocation().pathname;
-    console.log(currentURL);
-    const isProfilePage = matchPath("/profile/*", currentURL);
+    // const isProfilePage = matchPath("/profile/*", currentURL);
+
+    const username = localStorage.getItem("username");
+    console.log('username:', username);
+    console.log("currentURL:", currentURL);
     const isTodoPage = matchPath("/", currentURL);
 
 
@@ -28,13 +30,19 @@ export default function Nav() {
                 {/* #TODO: fix UI and make it look good with background and responsive */}
             </div>
             <div className="nav-bottom nav-items">
-                {isTodoPage ?
-                    <Link className='btnC' to={`/profile/${localStorage.getItem("username")}`}>
-                        <User className='nav-icon' />
-                    </Link>
-                    : <Link to="/">
-                        {/* <User className='nav-icon' /> */}
-                        <img src="/todo.svg" alt="" className='nav-icon todo-icon' />
+                {username ? <div>
+                    {isTodoPage ?
+                        <Link className='btnC' to={`/profile/${username}`}>
+                            <User className='nav-icon' />
+                        </Link>
+                        : <Link to="/">
+                            {/* <User className='nav-icon' /> */}
+                            <img src="/todo.svg" alt="" className='nav-icon todo-icon' />
+                        </Link>
+                    }</div>
+                    :
+                    <Link to='/' className='btnC'>
+                        <User className='nav-icon'/>
                     </Link>
                 }
                 <button className="btnC" onClick={changeTheme} >

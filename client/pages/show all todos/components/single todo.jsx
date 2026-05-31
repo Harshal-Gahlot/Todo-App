@@ -4,7 +4,7 @@ import { Trash2, EllipsisVertical, GripVertical } from 'lucide-react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import TodoMoreContainer from "./todo more container";
-
+// TODO: display popped up dragable todo for better UX
 export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setTodoMore, dragging, setDragging }) {
 
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: todo._id });

@@ -14,7 +14,7 @@ export default function ProfilePage() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        console.log('profilePage mounted with name::::::::::::::', params.username);
+        console.log('profilePage mounted with name: ', params.username);
         async function getProfileData() {
             try {
                 const res = await axios.get(
@@ -37,7 +37,7 @@ export default function ProfilePage() {
             }
         }
 
-        if (params.username) {
+        if (params.username !== null) {
             getProfileData();
         } else {
             console.log("username not provided");
