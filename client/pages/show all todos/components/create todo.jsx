@@ -47,7 +47,7 @@ export default function CreateTodo() {
                 placeholder="What's upcoming?" onKeyDown={handleKeyDown}
             />
             <button onClick={addTodo} className="add-todo">
-                <Plus color="var(--text-color)" className="plus-btn" />
+                <Plus color="var(--text-light)" className="plus-btn" />
             </button>
         </div>
     );

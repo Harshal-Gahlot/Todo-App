@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: var(--base-color);
-    color: var(--text-varient);
+    background-color: var(--bg-dark);
+    color: var(--text-muted);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 8px 0px;
     height: 100dvh;
@@ -20,7 +20,7 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    color: var(--text-varient);
+    color: var(--text-muted);
     transition: background-color 0.3s;
 }
 
@@ -49,7 +49,7 @@
     top: 35px;
     position: absolute;
     right: -50px;
-    background-color: var(--base-varient);
+    background-color: var(--bg);
     /* border-radius: 8px 0 0 8px; */
 }
 
@@ -57,7 +57,7 @@
     width: 25px;
     height: 25px;
     display: block;
-    background-color: var(--base-color);
+    background-color: var(--bg);
     border-top-right-radius: 12px;
     /* border: 12px solid transparent;
     border-left-color: #0f0;
@@ -85,10 +85,10 @@
     /* border-bottom: 2px solid black; */
     border-radius: 0 8px 0 0;
     outline: none;
-    /* outline: 4px solid var(--unique-color); */
+    /* outline: 4px solid var(--text-accent); */
     z-index: 99;
-    color: var(--text-color);
-    background-color: var(--base-varient);
+    background-color: var(--bg-light);
+    color: var(--text-text);
     font-size: 24px;
 }
 
@@ -101,7 +101,7 @@
     display: inline-block;
     left: 55px;
     bottom: 0px;
-    /* outline: 2px solid var(--unique-color); */
+    /* outline: 2px solid var(--text-accent); */
     /* outline-offset: 2px; */
 }
 
@@ -112,8 +112,8 @@
     z-index: 99;
     min-width: 250px;
     max-width: 250px;
-    color: var(--text-color);
-    background-color: var(--base-varient);
+    color: var(--text-muted);
+    background-color: var(--bg-light);
     border-radius: 0 0 8px 8px;
     /* height: 25px; */
     /* bottom: calc(-60px); */
@@ -128,7 +128,7 @@
 }
 
 .search-results-box li:hover {
-    background-color: var(--unique-color);
+    color: var(--text-light);
 }
 
 .search-results-box li:last-child {
@@ -137,7 +137,7 @@
 
 .matched-username > * {
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--text-muted);
 }
 
 .nav-items .btnC {
@@ -160,7 +160,7 @@
         width: 28px;
         content: "";
         height: 28px;
-        color: var(--text-varient);
+        color: var(--text-light);
         background-image: url(/burger-menu.svg);
         fill: aqua;
         background-size: contain;

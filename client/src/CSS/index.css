@@ -5,41 +5,56 @@
 }
 
 .dark {
-    --base-color: #000;
-    --base-varient: #222;
-    --text-color: #fff;
-    --text-varient: #c0c0c0c0;
-    --unique-color: #24a0ed;
-    --unique-color-light-1: #8fd3fe;
-    --unique-color-light-2: #75d6ff;
-    --base-contrast: #333;
+    --bg-dark: hsl(0, 0%, 2%);
+    --bg: hsl(0, 0%, 8%);
+    --bg-light: hsl(0, 0%, 20%);
+
+    --text-muted: hsl(0, 0%, 70%);
+    --text-muted-light: hsl(0, 0%, 85%);
+    --text-light: hsl(0, 0%, 95%);
+    --text-accent: hsl(203, 85%, 54%); /* #24a0ed; */
+    --accent-shade: hsl(203, 95%, 45%); /* --unique-color-light-2: #75d6ff; */
+
+    --border: hsl(0, 0%, 30%);
+    --highlight: hsl(0, 0%, 60%);
+    --gradient: linear-gradient(0deg, var(--bg) 90%, var(--bg-light));
+    --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
 }
 
 .light {
-    --base-color: #fff;
-    --base-varient: #ddd;
-    --text-color: #000;
-    --text-varient: #222;
-    --unique-color: #24a0ed;
-    --unique-color-light-1: #8fd3fe;
-    --unique-color-light-2: #75d6ff;
-    --common-color: #333;
+    --bg-dark: hsl(0, 0%, 86%);
+    --bg: hsl(0, 0%, 92%);
+    --bg-light: hsl(0, 0%, 98%);
+
+    --text-muted: hsl(0, 0%, 30%);
+    --text-muted-light: hsl(0, 0%, 15%);
+    --text-light: hsl(0, 0%, 5%);
+    --text-accent: hsl(203, 85%, 54%); /* #24a0ed; */
+    --accent-shade: hsl(203, 95%, 45%); /* --unique-color-light-2: #75d6ff; */
+
+    --border: hsl(0, 0%, 70%);
+    --highlight: hsl(0, 0%, 40%);
+    --gradient: linear-gradient(0deg, var(--bg) 90%, var(--bg-light));
+    --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
 }
 
-body, #app-root-container {
-    background-color: var(--base-color);
+/* --common-color: #333; */
+
+body,
+#app-root-container {
+    background-color: var(--bg-dark);
 }
 
 #app-root-container {
-    color: var(--text-color);
+    color: var(--text-muted);
     width: 100%;
-    min-height:100vh;
+    min-height: 100vh;
     height: 100%;
 }
 
 .btnC {
-    background: var(--base-color);
-    color: var(--text-varient);
+    background: var(--bg-dark);
+    color: var(--text-muted);
     border: none;
     cursor: pointer;
     display: grid;
@@ -48,20 +63,26 @@ body, #app-root-container {
 }
 
 .btnR {
-    background-color: var(--base-color);
-    color: var(--text-varient);
+    background-color: var(--bg-dark);
+    color: var(--text-muted);
     border: none;
     cursor: pointer;
     padding: 8px;
     border-radius: 8px;
 }
 
-.btnC :first-child, .btnR :first-child  {
+.btnC :first-child,
+.btnR :first-child {
     align-items: center;
     color: inherit;
 }
 
-.btnC:hover, .btnR:hover  {
-    background-color: var(--base-varient);
-    color: var(--text-color);
+.btnC:hover {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+}
+
+.btnR:hover {
+    background-color: var(--bg);
+    color: var(--text-light);
 }

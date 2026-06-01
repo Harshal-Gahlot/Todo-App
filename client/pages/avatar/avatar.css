@@ -10,14 +10,14 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    background-color: #00000083;
+    background-color: var(--bg);
 }
 
 .avatar-selection-box {
     display: flex;
     align-items: center;
     position: relative;
-    background-color: var(--base-varient);
+    background-color: var(--bg-light);
     padding: 1rem 3rem 4rem 3rem;
     border-radius: 2rem;
     box-shadow: 0 0 10px 1px var(--text-color);
@@ -25,7 +25,7 @@
 
 .show-avatars-btn {
     background-color: transparent; 
-    color: var(--text-varient);
+    color: var(--text-muted);
     border: none;
     cursor: pointer;
     height: 250px;
@@ -35,7 +35,7 @@
 
 .show-avatars-btn:hover {
     background: radial-gradient(var(--text-color) -125%, transparent 70%) !important;
-    color: var(--text-color);
+    color: var(--text-light);
 }
 
 .show-avatars-btn-left {
@@ -68,9 +68,9 @@
 }
 
 .avatar-selection-btn {
-    /* background-color: var(--base-contrast) ; */
-    background-color: var(--unique-color) ;
-    color: #000;
+    /* background-color: var(--bg-light) ; */
+    background-color: var(--text-accent) ;
+    color: var(bg-dark);
     padding: 8px 16px;
     border: none;
     cursor: pointer;
@@ -78,5 +78,5 @@
 }
 
 .avatar-selection-btn:hover {
-    background-color: var(--unique-color-light-2);
+    background-color: var(--accent-shade);
 }

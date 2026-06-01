@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import useClosePopupOutside from '../../../utils/close outside click';
 // TODO:  Missing ARIA Labels & Focus Management
 export default function TodoMoreContainer({ todo, updateTodo, sortedTodos, setTodoMore }) {
-    const [tagColor, setTagColor] = useState(localStorage.getItem("lastTagColor") ? localStorage.getItem("lastTagColor") : `var(--unique-color)`);
+    const [tagColor, setTagColor] = useState(localStorage.getItem("lastTagColor") ? localStorage.getItem("lastTagColor") : `var(--text-accent)`);
     const menuRef = useRef(null);
     useClosePopupOutside(menuRef, setTodoMore, null);
 

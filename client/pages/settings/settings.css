@@ -2,6 +2,8 @@
     display: flex;
     justify-content: center;
     margin-top: 64px;
+    width: 100%;
+    height: fit-content;
 }
 
 .list-title {
@@ -11,7 +13,7 @@
 
 .todo-default-container {
     width: 600px;
-    background: var(--base-varient);
+    background: var(--bg);
     border-radius: 8px;
     padding: 32px;
 }
@@ -40,8 +42,8 @@
     content: "Private       Public";
     white-space: pre;
     text-align: center;
-    background-color: #444;
-    color: var(--text-varient);
+    background-color: var(--bg-light);
+    color: var(--text-muted);
     width: fit-content;
     padding-left: 2ch;
     padding-right: 2ch;
@@ -57,7 +59,7 @@
     padding-left: 2ch;
     padding-right: 2ch;
     width: fit-content;
-    background-color: blue;
+    background-color: var(--accent-shade);
     color: white;
     height: 32px;
     line-height: 32px;
@@ -72,9 +74,7 @@
     padding-left: 2ch;
     padding-right: 2ch;
     width: fit-content;
-    /* background-color: #CDCDCD; */
-    /* color: black; */
-    background-color: blue;
+    background-color: var(--accent-shade);
     color: white;
     height: 32px;
     line-height: 32px;

@@ -1,6 +1,6 @@
 body:has(#profile-container),
 #app-root-container:has(#profile-container) {
-    background-color: var(--base-varient);
+    background-color: var(--bg-dark);
     margin: auto;
 }
 
@@ -8,7 +8,7 @@ body:has(#profile-container),
     flex-grow: 1;
     /* flex-basis: 1200px; */
     border-radius: 2rem;
-    background-color: var(--base-color);
+    background-color: var(--bg);
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 1rem;
@@ -39,7 +39,7 @@ body:has(#profile-container),
     width: 1px;
     height: 86%;
     opacity: 0.5;
-    background-color: var(--text-varient);
+    background-color: var(--border);
 }
 
 .pfp-container {
@@ -72,13 +72,13 @@ body:has(#profile-container),
     align-items: center;
     background-color: transparent;
     border: none;
-    color: var(--text-varient);
+    color: var(--text-muted);
     gap: 4px;
     padding: 0 0.5rem;
 }
 
 button.view-follow:hover {
-    color: var(--unique-color);
+    color: var(--text-accent);
 }
 
 .follow-icons {
@@ -87,20 +87,28 @@ button.view-follow:hover {
 
 .edit-or-follow-btn {
     margin: auto;
-    padding: 2px 8px;
-    border-radius: 6px;
-    border: none;
-    background-color: var(--text-varient);
-    color: var(--base-color);
+    padding: 8px 16px;
+    border-radius: 0.5rem;
     cursor: pointer;
+    background: var(--gradient);
+    border: solid 1px var(--border);
+    border-top: solid 1px var(--highlight);
+    color: var(--text-light);
 }
 
 .follow-btn {
-    background-color: var(--unique-color);
+    background: var(--text-muted);
+    color: var(--bg);
+    border-radius: 4rem;
+    font-weight: 700;
 }
 
 .edit-or-follow-btn:hover {
-    background-color: var(--text-color);
+    background: var(--gradient-hover);
+}
+
+.follow-btn:hover {
+    background: var(--text-light);
 }
 
 .social-media-links {
@@ -115,11 +123,11 @@ button.view-follow:hover {
 }
 
 .social-media-links li:hover {
-    background-color: var(--base-varient);
+    background-color: var(--bg-light);
 }
 
 .social-media-svg {
-    color: var(--text-varient);
+    color: var(--text-muted);
 }
 
 .social-media-links li:hover .social-media-svg {

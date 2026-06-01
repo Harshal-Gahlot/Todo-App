@@ -25,7 +25,7 @@ export default function SearchComponent() {
 
     return (
         <div className="search-bar" >
-            <div style={openSearch ? { 'backgroundColor': 'var(--base-varient)' } : { 'backgroundColor': "transparent" }}
+            <div style={openSearch ? { 'backgroundColor': 'var(--bg-light)' } : { 'backgroundColor': "transparent" }}
                 className='search-icon-container' onClick={() => setOpenSearch(x => !x)} >
                 <Search className="nav-icon" />
             </div>
