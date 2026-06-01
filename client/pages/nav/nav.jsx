@@ -42,13 +42,15 @@ export default function Nav() {
                     }</div>
                     :
                     <Link to='/' className='btnC'>
-                        <User className='nav-icon'/>
+                        <User className='nav-icon' />
                     </Link>
                 }
+                <Link className='btnC' to={`/${username}/settings`}>
+                    <Settings className="nav-icon settings" />
+                </Link>
                 <button className="btnC" onClick={changeTheme} >
                     {localStorage.getItem("theme") === "dark" ? <Moon className='nav-icon' /> : <Sun className='nav-icon' />}
                 </button>
-                {/* <Settings className="nav-icon settings" /> */}
                 {/* {window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light'} */}
             </div>
         </div>
