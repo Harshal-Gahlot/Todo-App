@@ -1,0 +1,289 @@
+.display-flex {
+    display: flex;
+}
+
+#feed-page {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    position: relative;
+    margin-top: 24px;
+}
+
+#feed-container {
+    width: 50vw;
+}
+
+.feed-title {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    color: var(--text-light);
+    margin-bottom: 24px;
+    font-weight: 600;
+}
+
+.feed-list {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.feed-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 48px;
+    color: var(--text-muted);
+}
+
+.loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--border);
+    border-top-color: var(--text-accent);
+    border-radius: var(--radius-full);
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.feed-error {
+    padding: 24px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.error-note {
+    font-size: 13px;
+    margin-top: 4px;
+    opacity: 0.7;
+}
+
+.feed-empty {
+    padding: 48px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.empty-hint {
+    font-size: 13px;
+    margin-top: 8px;
+    opacity: 0.7;
+}
+
+/* Feed Todo Card */
+.feed-todo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background-color var(--transition-fast);
+}
+
+.feed-todo-container:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Header */
+.feed-todo-header {
+    display: flex;
+    align-items: center;
+}
+
+.feed-todo-author-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+}
+
+.feed-todo-author-link:hover .feed-todo-name {
+    text-decoration: underline;
+}
+
+.feed-todo-pfp {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.feed-todo-author-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.2;
+    gap: 8px;
+    
+}
+
+.feed-todo-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text-light);
+}
+
+.feed-todo-dot {
+    color: var(--text-muted)
+}
+
+.feed-todo-date {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Content */
+.feed-todo-content {
+    margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.feed-todo-title-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.feed-todo-check-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--text-muted);
+}
+
+.feed-todo-title {
+    font-size: 20px;
+    color: var(--text-light);
+    font-family: Poppins, sans-serif;
+    word-break: break-word;
+    line-height: 1.4;
+}
+
+.feed-todo-done {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* Tags */
+.feed-todo-tag-container {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    list-style-type: none;
+    margin-top: 4px;
+}
+
+.feed-todo-tag {
+    font-size: 11px;
+    padding: 2px 10px;
+    white-space: nowrap;
+    border: 1px solid;
+    border-radius: var(--radius-full);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+    cursor: pointer;
+    transition:
+        opacity var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.feed-todo-tag:hover {
+    opacity: 0.75;
+    transform: scale(0.95);
+}
+
+/* Actions */
+.feed-todo-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.feed-action-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    font-size: 13px;
+}
+
+.feed-action-btn:hover {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    border-color: var(--border);
+}
+
+.feed-action-btn:active {
+    transform: scale(0.97);
+}
+
+.feed-action-btn-liked {
+    color: var(--text-accent);
+}
+
+.feed-action-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.feed-action-icon-liked {
+    color: var(--text-accent);
+}
+
+.feed-action-count {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* Responsive */
+@media screen and (max-width: 750px) {
+    #feed-container {
+        width: 65vw;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #feed-container {
+        width: auto;
+    }
+
+    .feed-todo-container {
+        margin: 0 auto;
+    }
+
+    .feed-todo-title {
+        font-size: 18px;
+    }
+
+    .feed-todo-tag {
+        font-size: 10px;
+    }
+}
