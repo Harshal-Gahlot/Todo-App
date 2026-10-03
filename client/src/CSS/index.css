@@ -1,3 +1,15 @@
+:root {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'Outfit', 'Inter', sans-serif;
+    --font-display: 'Caveat', cursive;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-full: 9999px;
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,84 +17,149 @@
 }
 
 .dark {
-    --bg-dark: hsl(0, 0%, 2%);
-    --bg: hsl(0, 0%, 8%);
-    --bg-light: hsl(0, 0%, 20%);
+    /* Sleek, deep slate/zinc dark mode */
+    --bg-dark: #090a0f;
+    --bg: #11131a;
+    --bg-light: #1a1e29;
+    --bg-elevated: #222736;
+    --surface-glass: rgba(26, 30, 41, 0.7);
 
     --text-muted: hsl(0, 0%, 70%);
-    --text-muted-light: hsl(0, 0%, 85%);
-    --text-light: hsl(0, 0%, 95%);
-    --text-accent: hsl(203, 85%, 54%); /* #24a0ed; */
-    --accent-shade: hsl(203, 95%, 45%); /* --unique-color-light-2: #75d6ff; */
+    --text-muted-light: #b4bccd;
+    --text-light: #f3f5f9;
+    
+    --text-accent: #2dd4bf;
+    --accent-shade: #14b8a6;
+    --accent-glow: rgba(45, 212, 191, 0.2);
+    
+    --border: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.16);
+    --highlight: rgba(255, 255, 255, 0.12);
+    
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 16px 36px -8px rgba(0, 0, 0, 0.6);
 
-    --border: hsl(0, 0%, 30%);
-    --highlight: hsl(0, 0%, 60%);
-    --gradient: linear-gradient(0deg, var(--bg) 90%, var(--bg-light));
-    --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
+    --gradient: linear-gradient(180deg, #161922 0%, #11131a 100%);
+    --gradient-hover: linear-gradient(180deg, #1c202c 0%, #151821 100%);
+    --color-scheme: dark;
 }
 
 .light {
-    --bg-dark: hsl(0, 0%, 86%);
-    --bg: hsl(0, 0%, 92%);
-    --bg-light: hsl(0, 0%, 98%);
+    /* Warm, clean, high-contrast crisp light mode */
+    --bg-dark: #f0f2f5;
+    --bg: #ffffff;
+    --bg-light: #f8fafc;
+    --bg-elevated: #ffffff;
+    --surface-glass: rgba(255, 255, 255, 0.85);
 
-    --text-muted: hsl(0, 0%, 30%);
-    --text-muted-light: hsl(0, 0%, 15%);
-    --text-light: hsl(0, 0%, 5%);
-    --text-accent: hsl(203, 85%, 54%); /* #24a0ed; */
-    --accent-shade: hsl(203, 95%, 45%); /* --unique-color-light-2: #75d6ff; */
+    --text-muted: #64748b;
+    --text-muted-light: #475569;
+    --text-light: #0f172a;
+    
+    --text-accent: #0d9488;
+    --accent-shade: #0f766e;
+    --accent-glow: rgba(13, 148, 136, 0.15);
 
-    --border: hsl(0, 0%, 70%);
-    --highlight: hsl(0, 0%, 40%);
-    --gradient: linear-gradient(0deg, var(--bg) 90%, var(--bg-light));
-    --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
+    --border: rgba(15, 23, 42, 0.08);
+    --border-hover: rgba(15, 23, 42, 0.18);
+    --highlight: rgba(15, 23, 42, 0.05);
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 6px 18px -3px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 16px 32px -6px rgba(0, 0, 0, 0.12);
+
+    --gradient: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    --gradient-hover: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    --color-scheme: light;
 }
 
-/* --common-color: #333; */
+html, body {
+    height: 100%;
+    font-family: var(--font-sans);
+    color-scheme: var(--color-scheme);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
-body,
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    transition: background-color var(--transition-smooth), color var(--transition-smooth);
+}
+
 #app-root-container {
     background-color: var(--bg-dark);
-}
-
-#app-root-container {
-    color: var(--text-muted);
+    color: var(--text-light);
     width: 100%;
     min-height: 100vh;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
+/* Common reusable button components */
 .btnC {
-    background: var(--bg-dark);
+    background: transparent;
     color: var(--text-muted);
-    border: none;
+    border: 1px solid transparent;
     cursor: pointer;
-    display: grid;
-    padding: 8px;
-    border-radius: 50%;
-}
-
-.btnR {
-    background-color: var(--bg-dark);
-    color: var(--text-muted);
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 8px;
-}
-
-.btnC :first-child,
-.btnR :first-child {
+    display: inline-flex;
     align-items: center;
-    color: inherit;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 100%;
+    transition: all var(--transition-fast);
 }
 
 .btnC:hover {
     background-color: var(--bg-light);
     color: var(--text-light);
+    border-color: var(--border);
+    transform: translateY(-1px);
+}
+
+.btnC:active {
+    transform: translateY(0);
+}
+
+.btnR {
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid transparent;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
 }
 
 .btnR:hover {
-    background-color: var(--bg);
+    background-color: var(--bg-light);
     color: var(--text-light);
+    border-color: var(--border);
+}
+
+.btnR:active {
+    transform: scale(0.97);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-hover);
+    border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
 }

@@ -1,27 +1,14 @@
 import { Moon, Sun, Settings, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { TodoContext } from '../context api';
-import { useContext, useState } from 'react';
-import { useLocation, matchPath } from 'react-router-dom';
+import { useContext } from 'react';
 import SearchComponent from './components/searchComponent';
 import "./nav.css";
 
 export default function Nav() {
-    const { theme, setTheme } = useContext(TodoContext);
-    const currentURL = useLocation().pathname;
-    // const isProfilePage = matchPath("/profile/*", currentURL);
+    const { theme, toggleTheme } = useContext(TodoContext);
 
     const username = localStorage.getItem("username");
-    console.log('username:', username);
-    console.log("currentURL:", currentURL);
-    const isTodoPage = matchPath("/", currentURL);
-
-
-    function changeTheme() {
-        const toTheme = theme === "light" ? "dark" : "light";
-        localStorage.setItem("theme", toTheme);
-        setTheme(toTheme);
-    }
 
     return (
         <div id="nav-component">
@@ -30,29 +17,30 @@ export default function Nav() {
                 {/* #TODO: fix UI and make it look good with background and responsive */}
             </div>
             <div className="nav-bottom nav-items">
-                {username ? <div>
-                    {isTodoPage ?
-                        <Link className='btnC' to={`/profile/${username}`}>
-                            <User className='nav-icon' />
-                        </Link>
-                        : <Link to="/">
-                            {/* <User className='nav-icon' /> */}
-                            <img src="/todo.svg" alt="" className='nav-icon todo-icon' />
-                        </Link>
-                    }</div>
+                <Link className='btnC' to="/" title="Todos">
+                    <img src="/todo.svg" alt="Todos" className='nav-icon todo-icon' />
+                </Link>
+                {username ?
+                    <Link className='btnC' to={`/profile/${username}`} title="Profile">
+                        <User className='nav-icon' />
+                    </Link>
                     :
-                    <Link to='/' className='btnC'>
+                    <Link to='/' className='btnC' title="Login / Home">
                         <User className='nav-icon' />
                     </Link>
                 }
                 <Link className='btnC' to={`/${username}/settings`}>
                     <Settings className="nav-icon settings" />
                 </Link>
-                <button className="btnC" onClick={changeTheme} >
-                    {localStorage.getItem("theme") === "dark" ? <Moon className='nav-icon' /> : <Sun className='nav-icon' />}
+                <button 
+                    className="btnC theme-toggle-btn" 
+                    onClick={toggleTheme} 
+                    title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                    aria-label="Toggle color theme"
+                >
+                    {theme === "dark" ? <Sun className='nav-icon' /> : <Moon className='nav-icon' />}
                 </button>
-                {/* {window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light'} */}
             </div>
         </div>
     );
-}
+}

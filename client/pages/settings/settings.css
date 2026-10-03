@@ -1,31 +1,38 @@
 .setting-container {
     display: flex;
     justify-content: center;
-    margin-top: 64px;
+    padding-top: 48px;
     width: 100%;
     height: fit-content;
 }
 
 .list-title {
-    font-size: larger;
-    padding: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    color: var(--text-light);
+    margin-bottom: 16px;
 }
 
 .todo-default-container {
-    width: 600px;
+    width: 100%;
+    max-width: 540px;
     background: var(--bg);
-    border-radius: 8px;
-    padding: 32px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 28px 32px;
 }
 
 .defaults-list {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
-    padding: 8px;
-    padding-left: 32px;
-    width: 500px;
+    gap: 16px;
+    padding: 12px 0;
+    width: 100%;
+    font-size: 14px;
+    color: var(--text-muted-light);
 }
 
 .defaults-list * {

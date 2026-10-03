@@ -4,13 +4,13 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const User = new Schema({
-    name: { type: String, required: true },
+    name: { type: String, unique: true, required: true },
     email: { type: String, unique: true, required: true },
-    password: { type: String, required: true },
+    password: { type: String, minlength: 6, required: true },
     followers: { type: [ObjectId], default: [] },
     following: { type: [ObjectId], default: [] },
     userData: {
-        bio: { type: String, default: "", maxlenght: 220 },
+        bio: { type: String, default: "", maxlength: 220 },
         links: {
             site: { type: String, default: "" },
             X: { type: String, default: "" },

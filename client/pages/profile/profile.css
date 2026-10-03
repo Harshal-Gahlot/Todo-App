@@ -1,35 +1,34 @@
 body:has(#profile-container),
 #app-root-container:has(#profile-container) {
     background-color: var(--bg-dark);
-    margin: auto;
 }
 
 #profile-container {
     flex-grow: 1;
-    /* flex-basis: 1200px; */
-    border-radius: 2rem;
+    border-radius: var(--radius-lg);
     background-color: var(--bg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 1rem;
-    max-width: 1200px;
-    margin: 2rem auto;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 2.5rem auto;
     height: min-content;
+    overflow: hidden;
 }
 
 .display-flex {
     display: flex;
-    /* margin: auto; */
 }
 
 .left {
     display: flex;
     flex-direction: column;
-    padding: 3rem 0;
-    gap: 8px;
+    padding: 3rem 2rem;
+    gap: 12px;
     position: relative;
-    justify-content: center;
-    /* max-width: 350px; */
+    align-items: center;
 }
 
 .left::after {
@@ -37,8 +36,7 @@ body:has(#profile-container),
     position: absolute;
     right: 0px;
     width: 1px;
-    height: 86%;
-    opacity: 0.5;
+    height: 80%;
     background-color: var(--border);
 }
 
@@ -46,24 +44,30 @@ body:has(#profile-container),
     display: flex;
     justify-content: center;
     position: relative;
+    margin-bottom: 8px;
 }
 
 .pfp {
-    border-radius: 100%;
-    max-width: 250px;
-    min-width: 50px;
-    /* mix-blend-mode:hard-light; */
+    border-radius: var(--radius-full);
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border: 3px solid var(--border);
+    box-shadow: var(--shadow-sm);
 }
 
 .name {
     display: inline;
     margin: auto;
-    font-family: caveat;
+    font-family: Caveat, cursive;
+    font-size: 32px;
+    color: var(--text-light);
 }
 
 .view-follow-container {
     display: flex;
     align-items: center;
+    gap: 8px;
     margin: auto;
 }
 
@@ -73,8 +77,11 @@ body:has(#profile-container),
     background-color: transparent;
     border: none;
     color: var(--text-muted);
-    gap: 4px;
-    padding: 0 0.5rem;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color var(--transition-fast);
 }
 
 button.view-follow:hover {
@@ -82,29 +89,32 @@ button.view-follow:hover {
 }
 
 .follow-icons {
-    width: 16px;
+    width: 14px;
+    height: 14px;
 }
 
 .edit-or-follow-btn {
     margin: auto;
     padding: 8px 16px;
-    border-radius: 0.5rem;
+    border-radius: var(--radius-sm);
     cursor: pointer;
     background: var(--gradient);
     border: solid 1px var(--border);
     border-top: solid 1px var(--highlight);
     color: var(--text-light);
+    font-weight: 500;
+    transition: background var(--transition-fast);
+}
+
+.edit-or-follow-btn:hover {
+    background: var(--gradient-hover);
 }
 
 .follow-btn {
     background: var(--text-muted);
     color: var(--bg);
-    border-radius: 4rem;
+    border-radius: var(--radius-sm);
     font-weight: 700;
-}
-
-.edit-or-follow-btn:hover {
-    background: var(--gradient-hover);
 }
 
 .follow-btn:hover {
@@ -114,31 +124,36 @@ button.view-follow:hover {
 .social-media-links {
     display: flex;
     list-style-type: none;
-    margin: auto;
+    gap: 8px;
+    margin-top: 8px;
 }
 
 .social-media-links li {
-    padding: 0.5rem 0.5rem 0.2rem 0.5rem;
-    border-radius: 4px;
+    padding: 6px;
+    border-radius: var(--radius-full);
+    transition: all var(--transition-fast);
 }
 
 .social-media-links li:hover {
     background-color: var(--bg-light);
+    transform: translateY(-1px);
 }
 
 .social-media-svg {
+    width: 18px;
+    height: 18px;
     color: var(--text-muted);
 }
 
 .social-media-links li:hover .social-media-svg {
-    color: var(--text-color);
+    color: var(--text-accent);
 }
 
 .right {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 3rem;
+    padding: 3rem 2.5rem;
 }
 
 .svg-404-container {
