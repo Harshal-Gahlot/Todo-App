@@ -84,6 +84,10 @@
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
 }
 
+.single-todo-container.todo-expanded {
+    align-items: flex-start;
+}
+
 .single-todo-container:hover {
     border-color: var(--border-hover);
     box-shadow: var(--shadow-sm);
@@ -120,26 +124,73 @@
     align-items: center;
     font-size: 28px;
     color: var(--text-light);
-    width: 50vw;
+    flex: 1;
+    min-width: 0;
     padding-left: 10px;
     position: relative;
+    gap: 4px;
 }
 
 .todo-title-text {
     position: relative;
     cursor: pointer;
     font-family: Poppins;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 10px;
-    flex-wrap: wrap;
-    width: calc(50vw - 170px);
+    flex-wrap: nowrap;
+    flex: 1 1 0;
+    width: 0;
     white-space: nowrap;
     overflow: hidden;
-    flex-shrink:1;
     min-width: 0;
     mask-image: linear-gradient(to right, black 85%, transparent 100%);
     -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+}
+
+.todo-expanded .todo-title {
+    align-items: flex-start;
+}
+
+.todo-title-label {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.todo-expanded .todo-title-text {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    white-space: normal;
+    overflow: visible;
+    align-items: stretch;
+    word-break: break-word;
+    mask-image: none;
+    -webkit-mask-image: none;
+}
+
+.todo-expanded .todo-title-label {
+    width: 100%;
+    flex: 1 1 auto;
+    white-space: normal;
+    overflow: visible;
+}
+
+.todo-title-expand-btn {
+    flex-shrink: 0;
+    align-self: center;
+    padding: 4px 8px;
+    font-size: 13px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: var(--text-accent);
+}
+
+.todo-expanded .todo-title-expand-btn {
+    align-self: flex-start;
+    margin-top: 6px;
 }
 
 .todo-checkbox[type="checkbox"]:checked+.todo-title {
@@ -148,10 +199,15 @@
 
 .todo-tag-container {
     display: inline-flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     list-style-type: none;
     gap: 6px;
+    flex-shrink: 0;
+}
+
+.todo-expanded .todo-tag-container {
+    flex-wrap: wrap;
 }
 
 .tag-color-input {

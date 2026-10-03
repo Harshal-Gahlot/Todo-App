@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import axios from 'axios';
 import { Trash2, EllipsisVertical, GripVertical } from 'lucide-react';
 import { useSortable } from '@dnd-kit/sortable';
@@ -6,6 +6,9 @@ import { CSS } from '@dnd-kit/utilities';
 import TodoMoreContainer from "./todo more container";
 // TODO: display popped up dragable todo for better UX
 export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setTodoMore, dragging, setDragging }) {
+    const titleRef = useRef(null);
+    const [titleExpanded, setTitleExpanded] = useState(false);
+    const [titleTruncated, setTitleTruncated] = useState(false);
 
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: todo._id });
 
@@ -94,8 +97,29 @@ export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setT
         setTodoMore(() => id);
     }
 
+    useLayoutEffect(() => {
+        const el = titleRef.current;
+        if (!el) return;
+
+        const checkTruncation = () => {
+            if (titleExpanded) return;
+            setTitleTruncated(el.scrollWidth > el.clientWidth + 1);
+        };
+
+        checkTruncation();
+        const observer = new ResizeObserver(checkTruncation);
+        observer.observe(el);
+        window.addEventListener('resize', checkTruncation);
+        document.fonts?.ready?.then(checkTruncation);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('resize', checkTruncation);
+        };
+    }, [todo.title, todo.tags, titleExpanded]);
+
     return (
-        <div className={className} key={todo._id} style={style} ref={setNodeRef} {...attributes} >
+        <div className={`${className}${titleExpanded ? ' todo-expanded' : ''}`} key={todo._id} style={style} ref={setNodeRef} {...attributes} >
             <button {...listeners} key={todo._id} className="btnR" ref={setNodeRef} style={{ cursor: "grab", touchAction: "none" }}>
                 <GripVertical />
             </button>
@@ -106,7 +130,7 @@ export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setT
                 checked={todo.done} />
             <div className="todo-title">
                 <label htmlFor={`todo-checkbox-${todo._id}`} className="todo-title-text">
-                    {todo.title}
+                    <span className="todo-title-label" ref={titleRef}>{todo.title}</span>
 
                     <ul className="todo-tag-container">
                         {todo.tags.map(([tag, tagColor], index) =>
@@ -119,6 +143,20 @@ export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setT
                         )}
                     </ul>
                 </label>
+                {(titleTruncated || titleExpanded) && (
+                    <button
+                        type="button"
+                        className="btnR todo-title-expand-btn"
+                        aria-expanded={titleExpanded}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setTitleExpanded((open) => !open);
+                        }}
+                    >
+                        {titleExpanded ? 'less' : 'more'}
+                    </button>
+                )}
             </div>
 
             <button className="btnR todo-more-btn" onClick={() => moreTodoBtn(todo._id)}>
