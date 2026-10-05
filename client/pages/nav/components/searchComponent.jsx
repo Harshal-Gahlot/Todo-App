@@ -3,9 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-export default function SearchComponent() {
-    const [openSearch, setOpenSearch] = useState(false);
-    const [seachingName, setSearchingName] = useState(false);
+export default function SearchComponent({ openSearch, setOpenSearch }) {
     const [userNameArray, setUserNameArray] = useState([]);
     const searchBarRef = useRef(null);
 
@@ -45,8 +43,8 @@ export default function SearchComponent() {
 
     return (
         <div className="search-bar" ref={searchBarRef}>
-            <div style={openSearch ? { 'backgroundColor': 'var(--bg-light)' } : { 'backgroundColor': "transparent" }}
-                className='search-icon-container' onClick={() => setOpenSearch(x => !x)} >
+            <div
+                className='search-icon-container btnC' onClick={() => setOpenSearch(x => !x)} >
                 <Search className="nav-icon" />
             </div>
             {openSearch &&

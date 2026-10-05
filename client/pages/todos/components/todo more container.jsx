@@ -1,4 +1,4 @@
-import { Tag, Pin, PinOff } from 'lucide-react';
+import { Tag, Pin, PinOff, Globe, Lock } from 'lucide-react';
 import { useRef, useState } from 'react';
 import useClosePopupOutside from '../../../utils/close outside click';
 // TODO:  Missing ARIA Labels & Focus Management
@@ -7,10 +7,18 @@ export default function TodoMoreContainer({ todo, updateTodo, sortedTodos, setTo
     const menuRef = useRef(null);
     useClosePopupOutside(menuRef, setTodoMore, null);
 
+    const isPublic = todo.category === "public";
+
     function pinHandler(event) {
         updateTodo(todo._id, { "isPinned": !todo.isPinned });
         setTodoMore(null);
-        // event.preventDefault();
+        // event.stopPropagation();
+    }
+
+    function toggleCategoryHandler(event) {
+        const newCategory = isPublic ? "private" : "public";
+        updateTodo(todo._id, { "category": newCategory });
+        setTodoMore(null);
         event.stopPropagation();
         console.log('aaaaaaaaaaaaaaaaaaaaa');
     }
@@ -35,6 +43,11 @@ export default function TodoMoreContainer({ todo, updateTodo, sortedTodos, setTo
                 {todo.isPinned ? <PinOff /> : <Pin />}
                 <p>{todo.isPinned ? "Unpin" : "Pin to top"}</p>
             </li>
+            <li className="btnR"
+                onClick={toggleCategoryHandler}>
+                {isPublic ? <Lock /> : <Globe />}
+                <p>{isPublic ? "Make Private" : "Make Public"}</p>
+            </li>
             <li className="btnR todo-tag-btn" onClick={(e) => e.stopPropagation()} >
 
 
@@ -52,7 +65,7 @@ export default function TodoMoreContainer({ todo, updateTodo, sortedTodos, setTo
                 </div>
 
 
-                <input type="text" placeholder="Add Tag" className="todo-tag-input" onKeyDown={(e) => {
+                <input type="text" placeholder="Add Tag" className="todo-tag-input" style={{ "color": tagColor }} onKeyDown={(e) => {
                     if (e.key === "Enter") {
                         tagFunction(e, todo._id);
                         e.preventDefault();

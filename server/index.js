@@ -237,20 +237,58 @@ app.delete("/todo/:id", auth, async (req, res) => {
     console.log("delete req came");
     const id = req.params.id;
     console.log("delete todo req came with id", id);
-    id === "undefined" &&
-        res.status(404).json({
+    if (id === "undefined" || !id) {
+        return res.status(404).json({
             message: "The ID of todo which is to be deleted isen't provided",
         });
+    }
     const todoToDelete = await TodoModel.findByIdAndDelete({ _id: id });
     res.status(200).send(`todo deleted successfully! ${todoToDelete}`);
 });
 
-app.get("/todos", auth, async (req, res) => {
-    console.log("show all todos get req came");
+// New soft delete endpoint: updates category to "bin" and date to now
+app.patch("/todo/:id/delete", auth, async (req, res) => {
+    const id = req.params.id;
+    console.log("soft delete todo req came with id", id);
+    if (id === "undefined" || !id) {
+        return res.status(404).json({
+            message: "The ID of todo which is to be deleted isen't provided",
+        });
+    }
+    const updatedTodo = await TodoModel.findOneAndUpdate(
+        { _id: id, userId: req.userId },
+        { category: "bin", date: new Date() },
+        { new: true }
+    );
+    if (!updatedTodo) {
+        return res.status(404).json({ message: "Todo not found" });
+    }
+    res.status(200).json({ message: "Todo moved to bin successfully", todo: updatedTodo });
+});
+
+// Empty bin endpoint: permanently delete all todos with category "bin" for user
+app.delete("/todos/bin", auth, async (req, res) => {
+    console.log("empty bin req came for userId:", req.userId);
+    const result = await TodoModel.deleteMany({ userId: req.userId, category: "bin" });
+    res.status(200).json({ message: "Bin emptied successfully", deletedCount: result.deletedCount });
+});
+
+app.get("/todos/:category", auth, async (req, res) => {
+    console.log("show todos get req came with params:", req.params);
     const userId = req.userId;
     console.log("userId:", userId);
+    const category = req.params.category.toLowerCase(); // "public" "private" "bin" "all"
 
-    const todos = await TodoModel.find({ userId: userId });
+    let findQuery = { userId: userId };
+    if (!category || category === "all") {
+        findQuery.category = { $ne: "bin" };
+    } else {
+        findQuery.category = category;
+    }
+
+    //TODO: make the fetching todos as streaming, i.e. there will a be btn on FE
+    //"Load more todos"/when user reaches end of todo and it will fetch next 25 todos. 
+    const todos = await TodoModel.find(findQuery).sort({ date: -1 }).limit(25);
 
     res.json({ todos });
 });

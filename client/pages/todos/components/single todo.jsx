@@ -64,7 +64,8 @@ export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setT
         setTodos((prev_todos) => prev_todos.filter(todo => todo._id != todoId));
 
         try {
-            const deletedTodo = await axios.delete(`https://todo-app-be-0kqo.onrender.com/todo/${todoId}`, {
+            // const deletedTodo = await axios.patch(`https://todo-app-be-0kqo.onrender.com/todo/${todoId}/delete`, {}, {
+            const deletedTodo = await axios.patch(`http://localhost:3000/todo/${todoId}/delete`, {}, {
                 headers: {
                     "token": localStorage.getItem("token")
                 }

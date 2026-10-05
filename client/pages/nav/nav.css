@@ -1,4 +1,7 @@
 #nav-component {
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -6,7 +9,7 @@
     color: var(--text-muted);
     border-right: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
-    padding: 24px 0 16px 0;
+    padding: 64px 0 16px 0;
     flex-shrink: 0;
     height: 100dvh;
     width: 60px;
@@ -24,7 +27,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 20px;
     color: var(--text-muted);
 }
 
@@ -135,6 +138,13 @@
     width: 38px;
     height: 38px;
     padding: 0;
+}
+
+.nav-items .btnC.active {
+    background-color: var(--bg-light);
+    color: var(--text-accent);
+    border-color: var(--border-hover);
+    box-shadow: 0 0 0 1px var(--accent-glow);
 }
 
 .theme-toggle-btn {

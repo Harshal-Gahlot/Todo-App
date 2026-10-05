@@ -1,0 +1,102 @@
+.category-switcher {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-sans);
+}
+
+.category-switcher-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 38px;
+    padding: 0 14px;
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-light);
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-fast);
+}
+
+.category-switcher-btn:hover {
+    background-color: var(--bg-light);
+    border-color: var(--border-hover);
+}
+
+.category-switcher-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--text-accent);
+}
+
+.category-switcher-label {
+    letter-spacing: 0.2px;
+}
+
+.category-switcher-chevron {
+    width: 14px;
+    height: 14px;
+    color: var(--text-muted);
+    transition: transform var(--transition-fast);
+}
+
+.category-switcher-chevron.open {
+    transform: rotate(180deg);
+}
+
+.category-switcher-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 120;
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    list-style: none;
+    padding: 4px 12px 4px 2px;
+    display: flex;
+    flex-direction: column;
+    animation: switcherFadeIn 140ms ease-out;
+}
+
+@keyframes switcherFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.category-switcher-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    color: var(--text-muted-light);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.category-switcher-item:hover {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+}
+
+.category-switcher-item.selected {
+    background-color: var(--bg-light);
+    color: var(--text-accent);
+}
+
+.category-switcher-item-icon {
+    width: 15px;
+    height: 15px;
+    stroke-width: 1.8px;
+}

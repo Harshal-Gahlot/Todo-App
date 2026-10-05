@@ -3,6 +3,7 @@ import TodoPage from "../pages/todos/todo page";
 import FeedPage from "../pages/feed/feed page.jsx";
 import ProfilePage from "../pages/profile/profile page.jsx";
 import SettingsPage from "../pages/settings/settings page.jsx";
+import BinPage from "../pages/bin/bin page.jsx";
 import Nav from "../pages/nav/nav.jsx";
 import "./CSS/index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -16,6 +17,10 @@ function App() {
     {
       path: "/feed",
       element: <FeedPage />,
+    },
+    {
+      path: "/bin",
+      element: <BinPage />,
     },
     {
       path: "/profile/:username",

@@ -1,46 +1,80 @@
-import { Moon, Sun, Settings, User, Home } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Moon, Sun, Settings, User, Home, Trash2, ListTodo } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { TodoContext } from "../context api";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import SearchComponent from "./components/searchComponent";
 import "./nav.css";
 
 export default function Nav() {
     const { theme, toggleTheme } = useContext(TodoContext);
+    const location = useLocation();
+    const currentPath = location.pathname;
 
     const username = localStorage.getItem("username");
 
+    const isTodosActive = currentPath === "/";
+    const isFeedActive = currentPath === "/feed";
+    const isBinActive = currentPath === "/bin";
+    const isProfileActive = username && currentPath.startsWith(`/profile/${username}`);
+    const isSettingsActive = username && currentPath === `/${username}/settings`;
+    const [openSearch, setOpenSearch] = useState(false);
+
     return (
         <div id="nav-component">
-            <div className="nav-top">
-                <SearchComponent />
-                {/* #TODO: fix UI and make it look good with background and responsive */}
-            </div>
-            <div className="nav-bottom nav-items">
-                <Link className="btnC" to="/" title="Todos">
+            <div className="nav-top nav-items">
+                <Link
+                    className={`btnC ${isTodosActive ? "active" : ""}`}
+                    to="/"
+                    title="Todos"
+                >
+                    {/*
                     <img
                         src="/todo.svg"
                         alt="Todos"
                         className="nav-icon todo-icon"
                     />
+                    */}
+                    <ListTodo className="nav-icon" />
                 </Link>
-                <Link className="btnC" to="/feed" title="Feed">
+                <Link
+                    className={`btnC ${isFeedActive ? "active" : ""}`}
+                    to="/feed"
+                    title="Feed"
+                >
                     <Home className="nav-icon" />
                 </Link>
+                <SearchComponent openSearch={openSearch} setOpenSearch={setOpenSearch} />
                 {username ? (
                     <Link
-                        className="btnC"
+                        className={`btnC ${isProfileActive ? "active" : ""}`}
                         to={`/profile/${username}`}
                         title="Profile"
                     >
                         <User className="nav-icon" />
                     </Link>
                 ) : (
-                    <Link to="/" className="btnC" title="Login / Home">
+                    <Link
+                        to="/"
+                        className={`btnC ${isTodosActive ? "active" : ""}`}
+                        title="Login / Home"
+                    >
                         <User className="nav-icon" />
                     </Link>
                 )}
-                <Link className="btnC" to={`/${username}/settings`}>
+                <Link
+                    className={`btnC ${isBinActive ? "active" : ""}`}
+                    to="/bin"
+                    title="Bin"
+                >
+                    <Trash2 className="nav-icon" />
+                </Link>
+            </div>
+            <div className="nav-bottom nav-items">
+                <Link
+                    className={`btnC ${isSettingsActive ? "active" : ""}`}
+                    to={`/${username}/settings`}
+                    title="Settings"
+                >
                     <Settings className="nav-icon settings" />
                 </Link>
                 <button

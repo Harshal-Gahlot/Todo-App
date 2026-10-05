@@ -5,7 +5,7 @@ import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSo
 import { TodoContext } from "../context api";
 import SingleTodo from "./components/single todo";
 
-export default function TodoList() {
+export default function TodoList({ showCategory = "all" }) {
     const { todos, setTodos } = useContext(TodoContext);
     const [todoMore, setTodoMore] = useState(null);
     const [dragging, setDragging] = useState(false);
@@ -33,13 +33,13 @@ export default function TodoList() {
         }),
     );
 
-    useEffect(() => { // Fetch all todos
+    useEffect(() => { // Fetch todos with category filter
         async function fetchTodos() {
             // TODO: Missing Loading & Error States
             try {
                 const res = await axios.get(
-                    "https://todo-app-be-0kqo.onrender.com/todos", {
-                // "http://localhost:3000/todos", {
+                    // `https://todo-app-be-0kqo.onrender.com/todos/${showCategory}`, {
+                    `http://localhost:3000/todos/${showCategory}`, {
                     headers: {
                         token: localStorage.getItem("token")
                     }
@@ -51,7 +51,7 @@ export default function TodoList() {
         }
 
         fetchTodos();
-    }, [localStorage.getItem("token"),]);
+    }, [localStorage.getItem("token"), showCategory]);
 
     function handleDragEnd(event) {
         console.log(event);
@@ -66,7 +66,7 @@ export default function TodoList() {
     }
 
     const sortedTodos = [...todos].sort((a, b) => b.isPinned - a.isPinned); // TODO: Memoize sorting 
-    console.log("ReRendered"); 
+    console.log("ReRendered");
 
     return (
         <DndContext collisionDetection={closestCenter} sensors={sensors} onDragEnd={handleDragEnd}>

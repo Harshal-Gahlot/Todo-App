@@ -27,15 +27,15 @@
     --text-muted: #565f89;
     --text-muted-light: #a9b1d6;
     --text-light: #c8d3f5;
-    
+
     --text-accent: #2dd4bf;
     --accent-shade: #14b8a6;
     --accent-glow: rgba(45, 212, 191, 0.2);
-    
+
     --border: #3b4261;
     --border-hover: #414868;
     --highlight: #283457;
-    
+
     --shadow-sm: 0 2px 8px rgba(12, 14, 20, 0.45);
     --shadow-md: 0 8px 24px -4px rgba(12, 14, 20, 0.55);
     --shadow-lg: 0 16px 36px -8px rgba(12, 14, 20, 0.7);
@@ -56,7 +56,7 @@
     --text-muted: #64748b;
     --text-muted-light: #475569;
     --text-light: #0f172a;
-    
+
     --text-accent: #0d9488;
     --accent-shade: #0f766e;
     --accent-glow: rgba(13, 148, 136, 0.15);
@@ -74,7 +74,8 @@
     --color-scheme: light;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     font-family: var(--font-sans);
     color-scheme: var(--color-scheme);
@@ -131,8 +132,8 @@ body {
     border-radius: var(--radius-sm);
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     transition: all var(--transition-fast);
+    font-size: medium;
 }
 
 .btnR:hover {
@@ -142,7 +143,7 @@ body {
 }
 
 .btnR:active {
-    transform: scale(0.97);
+    /* transform: scale(0.97); */
 }
 
 /* Custom scrollbar */

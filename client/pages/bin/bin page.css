@@ -1,0 +1,111 @@
+#bin-page {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    position: relative;
+    margin-top: 24px;
+}
+
+#bin-container {
+    width: 50vw;
+}
+
+.bin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.bin-title {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    color: var(--text-light);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bin-count-badge {
+    font-size: 13px;
+    padding: 3px 10px;
+    background-color: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-weight: 500;
+}
+
+.bin-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 72px 24px;
+    background: var(--bg);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    gap: 12px;
+}
+
+.bin-empty-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--text-muted);
+    opacity: 0.6;
+    stroke-width: 1.5px;
+}
+
+.bin-empty-title {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.bin-empty-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 320px;
+    line-height: 1.5;
+}
+
+.bin-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.bin-restore-btn:hover {
+    color: var(--text-accent);
+}
+
+.bin-permanent-delete-btn:hover {
+    color: #ef4444;
+}
+
+.bin-date-badge {
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    padding: 2px 8px;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 750px) {
+    #bin-container {
+        width: 65vw;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #bin-container {
+        width: 90vw;
+    }
+}

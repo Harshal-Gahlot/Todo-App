@@ -7,6 +7,22 @@
     margin-top: 24px;
 }
 
+.todo-page-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50vw;
+    margin-bottom: 24px;
+    margin: 64px 48px;
+}
+
+.todo-page-header-text {
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--text-light);
+    font-family: var(--font-sans);
+}
+
 #create-show-all-todo-container {
     width: 50vw;
 }
@@ -40,6 +56,7 @@
 
 #create-todo-title::placeholder {
     color: var(--text-muted);
+    font-size: small;
 }
 
 .add-todo {
@@ -110,7 +127,8 @@
     opacity: 0.5;
 }
 
-.single-todo-container:hover .btnR :first-child {
+
+.single-todo-container:hover button.btnR {
     color: var(--text-light);
 }
 
@@ -204,6 +222,7 @@
     list-style-type: none;
     gap: 6px;
     flex-shrink: 0;
+    font-size: small;
 }
 
 .todo-expanded .todo-tag-container {
@@ -293,7 +312,15 @@
     max-width: 75%;
     outline: none;
     color: var(--text-muted);
-    font-size: 1.1rem;
+    font-size: medium;
+}
+
+.todo-tag-input::placeholder {
+    color: var(--text-muted);
+}
+
+.todo-tag-btn:hover input::placeholder {
+    color: var(--text-light);
 }
 
 .todo-tag-btn:hover input {
