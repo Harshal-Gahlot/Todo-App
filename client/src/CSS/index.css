@@ -18,15 +18,15 @@
 
 .dark {
     /* Tokyo Night Night (LazyVim / tokyonight.nvim) */
-    --bg-dark: #16161e;
-    --bg: #1a1b26;
+    --bg-dark: #1e2030;
+    --bg: #222436;
     --bg-light: #292e42;
     --bg-elevated: #292e42;
     --surface-glass: rgba(22, 22, 30, 0.72);
 
     --text-muted: #565f89;
     --text-muted-light: #a9b1d6;
-    --text-light: #c0caf5;
+    --text-light: #c8d3f5;
     
     --text-accent: #2dd4bf;
     --accent-shade: #14b8a6;

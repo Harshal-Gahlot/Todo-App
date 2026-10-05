@@ -8,7 +8,6 @@ export default function SearchComponent() {
     const [seachingName, setSearchingName] = useState(false);
     const [userNameArray, setUserNameArray] = useState([]);
     const searchBarRef = useRef(null);
-    console.log('userNameArray', userNameArray);
 
     useEffect(() => {
         function handleClickOutside(event) {
