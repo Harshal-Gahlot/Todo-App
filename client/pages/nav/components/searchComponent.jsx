@@ -2,6 +2,7 @@ import { Search } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE } from '../../../utils/config';
 
 export default function SearchComponent({ openSearch, setOpenSearch }) {
     const [userNameArray, setUserNameArray] = useState([]);
@@ -31,8 +32,7 @@ export default function SearchComponent({ openSearch, setOpenSearch }) {
         }
         try {
             const users = await axios.get(
-                `https://todo-app-be-0kqo.onrender.com/userNameSearch/${searchTerm}`
-                // `http://localhost:3000/userNameSearch/${searchTerm}`
+                `${API_BASE}/userNameSearch/${searchTerm}`
             );
             console.log('users', users.data.matchingUsers);
             setUserNameArray(() => users.data.matchingUsers);
@@ -44,7 +44,7 @@ export default function SearchComponent({ openSearch, setOpenSearch }) {
     return (
         <div className="search-bar" ref={searchBarRef}>
             <div
-                className='search-icon-container btnC' onClick={() => setOpenSearch(x => !x)} >
+                className={`search-icon-container btnC${openSearch ? ' active' : ''}`} onClick={() => setOpenSearch(x => !x)} >
                 <Search className="nav-icon" />
             </div>
             {openSearch &&

@@ -1,9 +1,16 @@
 .setting-container {
     display: flex;
     justify-content: center;
-    padding-top: 48px;
+    padding: var(--page-v-pad) 0;
     width: 100%;
     height: fit-content;
+}
+
+.settings-inner {
+    width: var(--page-content-width);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 .list-title {
@@ -16,7 +23,6 @@
 
 .todo-default-container {
     width: 100%;
-    max-width: 540px;
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
@@ -33,12 +39,18 @@
     width: 100%;
     font-size: 14px;
     color: var(--text-muted-light);
+    border-top: 1px solid var(--border);
+}
+
+.defaults-list:first-of-type {
+    border-top: none;
 }
 
 .defaults-list * {
     cursor: pointer;
 }
 
+/* Category toggle (Private / Public sliding pill) */
 .toggle-input {
     position: relative;
     display: flex;
@@ -89,4 +101,114 @@
     border-radius: 50px;
     position: absolute;
     transform: translateX(calc(9ch + 0.9px));
+}
+
+/* Simple on/off toggle for other settings */
+.toggle-input-simple {
+    width: 44px;
+    height: 24px;
+    border-radius: 50px;
+    background-color: var(--bg-light);
+    border: 1px solid var(--border);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.toggle-input-simple::before {
+    content: "";
+    position: absolute;
+    width: 44px;
+    height: 24px;
+    border-radius: 50px;
+    background-color: var(--bg-light);
+    border: 1px solid var(--border);
+    top: 0;
+    left: 0;
+}
+
+.toggle-input-simple::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--text-muted);
+    top: 3px;
+    left: 3px;
+    transition: transform var(--transition-fast), background-color var(--transition-fast);
+    transform: none;
+    font-size: 0;
+    padding: 0;
+}
+
+.toggle-input-simple:checked {
+    background-color: var(--text-accent);
+    border-color: var(--text-accent);
+}
+
+.toggle-input-simple:checked::before {
+    background-color: var(--text-accent);
+    border-color: var(--text-accent);
+}
+
+.toggle-input-simple:checked::after {
+    content: "";
+    background-color: white;
+    transform: translateX(20px);
+    font-size: 0;
+    padding: 0;
+}
+
+.toggle-switch input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-track {
+    position: relative;
+    display: flex;
+    background-color: var(--bg-light);
+    border-radius: 50px;
+    padding: 2px;
+    height: 32px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    user-select: none;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.toggle-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 0 2ch;
+    height: 100%;
+    white-space: nowrap;
+    transition: color var(--transition-fast);
+    position: relative;
+    z-index: 2;
+    flex: 1;
+}
+
+.toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: calc(100% - 4px);
+    background-color: var(--accent-shade);
+    border-radius: 50px;
+    z-index: 1;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    will-change: transform;
+}
+
+.toggle-switch:hover .toggle-thumb {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }

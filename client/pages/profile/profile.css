@@ -12,8 +12,9 @@ body:has(#profile-container),
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 1.5rem;
-    max-width: 1000px;
-    margin: 2.5rem auto;
+    max-width: 860px;
+    width: calc(100% - 2 * var(--page-v-pad));
+    margin: var(--page-v-pad) auto;
     height: min-content;
     overflow: hidden;
 }
@@ -173,7 +174,9 @@ button.view-follow:hover {
 
 @media screen and (max-width: 1200px) {
     #profile-container {
-        margin: 2rem;
+        width: calc(100% - 2rem);
+        /* width: 2rem; */
+        margin: var(--page-v-pad) auto;
     }
 }
 

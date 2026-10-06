@@ -1,9 +1,10 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import axios from 'axios';
-import { Trash2, EllipsisVertical, GripVertical } from 'lucide-react';
+import { EllipsisVertical, GripVertical } from 'lucide-react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import TodoMoreContainer from "./todo more container";
+import { API_BASE } from "../../../utils/config";
 // TODO: display popped up dragable todo for better UX
 export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setTodoMore, dragging, setDragging }) {
     const titleRef = useRef(null);
@@ -19,12 +20,7 @@ export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setT
 
     console.log("style:", style);
 
-
-    // if (isDragging) setDragging(todo._id);
-
-    // const className = `single-todo-container ${dragging === todo._id ? "dragging" : ''}`;
     const className = "single-todo-container";
-    // console.log('dragging:', dragging);
 
     async function updateTodo(todoId, updatedData) {
         let outDatedData;
@@ -40,8 +36,7 @@ export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setT
         console.log('\ntodoId:', todoId, '\nupdatedData:', updatedData, '\noutDatedData:', outDatedData);
         try {
             const res = await axios.patch(
-                `https://todo-app-be-0kqo.onrender.com/todo/${todoId}`,
-                // `http://localhost:3000/todo/${todoId}`,
+                `${API_BASE}/todo/${todoId}`,
                 updatedData,
                 {
                     headers: {
@@ -63,19 +58,26 @@ export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setT
         const tempDeletedTodo = sortedTodos.find(todo => todo._id == todoId);
         setTodos((prev_todos) => prev_todos.filter(todo => todo._id != todoId));
 
+        const settings = JSON.parse(localStorage.getItem("settings") || "{}");
+        const directDelete = settings.directDelete === true;
+
         try {
-            // const deletedTodo = await axios.patch(`https://todo-app-be-0kqo.onrender.com/todo/${todoId}/delete`, {}, {
-            const deletedTodo = await axios.patch(`http://localhost:3000/todo/${todoId}/delete`, {}, {
-                headers: {
-                    "token": localStorage.getItem("token")
-                }
-            });
-            console.log('deletedTodo:', deletedTodo);
+            if (directDelete) {
+                // Hard delete — permanently remove
+                await axios.delete(`${API_BASE}/todo/${todoId}`, {
+                    headers: { "token": localStorage.getItem("token") }
+                });
+            } else {
+                // Soft delete — move to bin
+                const deletedTodo = await axios.patch(`${API_BASE}/todo/${todoId}/delete`, {}, {
+                    headers: { "token": localStorage.getItem("token") }
+                });
+                console.log('deletedTodo:', deletedTodo);
+            }
         } catch (err) {
             console.log("\nHarshal error occured while deleting todo:\n", err);
             setTodos((prev_todos) => [...prev_todos, tempDeletedTodo]);
         }
-
     }
 
     function removeTag(e, id, index) {
@@ -91,10 +93,6 @@ export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setT
     }
 
     function moreTodoBtn(id) {
-        // e.preventDefault();
-        // console.log('bbbbbbbbbbb')
-        // if (todoMore === id) setTodoMore(null);
-        // else
         setTodoMore(() => id);
     }
 
@@ -162,18 +160,15 @@ export default function SingleTodo({ todo, todoMore, sortedTodos, setTodos, setT
 
             <button className="btnR todo-more-btn" onClick={() => moreTodoBtn(todo._id)}>
                 {todoMore === todo._id &&
-                    < TodoMoreContainer
+                    <TodoMoreContainer
                         todo={todo}
                         sortedTodos={sortedTodos}
                         updateTodo={updateTodo}
+                        deleteTodo={deleteTodo}
                         setTodoMore={setTodoMore} />
                 }
-                < EllipsisVertical />
-            </button>
-
-            <button className="btnR" onClick={() => deleteTodo(todo._id)}>
-                <Trash2 />
+                <EllipsisVertical />
             </button>
         </div>
     );
-} 
+}

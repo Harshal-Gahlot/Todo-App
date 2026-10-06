@@ -4,11 +4,11 @@
     flex-grow: 1;
     align-items: center;
     position: relative;
-    margin-top: 24px;
+    padding: var(--page-v-pad) 0;
 }
 
 #bin-container {
-    width: 50vw;
+    width: var(--page-content-width);
 }
 
 .bin-header {
@@ -37,6 +37,24 @@
     color: var(--text-muted);
     font-family: var(--font-sans);
     font-weight: 500;
+}
+
+.bin-empty-btn {
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: var(--bg-light);
+    font-family: var(--font-sans);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.bin-empty-btn:hover {
+    color: #ef4444;
+    border-color: #ef444466;
+    background: #ef444411;
 }
 
 .bin-empty-state {
@@ -74,6 +92,39 @@
     line-height: 1.5;
 }
 
+.bin-direct-delete-info-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    background: color-mix(in srgb, var(--text-accent) 8%, var(--bg));
+    border: 1px solid color-mix(in srgb, var(--text-accent) 30%, transparent);
+    border-radius: var(--radius-md);
+}
+
+.bin-direct-delete-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--text-accent);
+    margin-top: 2px;
+}
+
+.bin-direct-delete-title {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 4px;
+}
+
+.bin-direct-delete-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
 .bin-actions {
     display: flex;
     align-items: center;
@@ -98,14 +149,14 @@
     white-space: nowrap;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 900px) {
     #bin-container {
-        width: 65vw;
+        width: var(--page-content-width);
     }
 }
 
 @media screen and (max-width: 600px) {
     #bin-container {
-        width: 90vw;
+        width: var(--page-content-width);
     }
 }

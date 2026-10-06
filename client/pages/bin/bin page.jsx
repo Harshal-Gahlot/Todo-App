@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Trash2, RotateCcw, ArchiveX } from "lucide-react";
+import { Trash2, RotateCcw, ArchiveX, AlertTriangle } from "lucide-react";
 import Nav from "../nav/nav";
 import "../todos/todos page.css";
 import "./bin page.css";
+import { API_BASE } from "../../utils/config";
 
 export default function BinPage() {
     const [binTodos, setBinTodos] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const directDelete = JSON.parse(localStorage.getItem("settings") || "{}").directDelete === true;
+
     async function fetchBinTodos() {
         try {
             setLoading(true);
-            // const res = await axios.get("https://todo-app-be-0kqo.onrender.com/todos", {
-            const res = await axios.get("http://localhost:3000/todos/bin", {
+            const res = await axios.get(`${API_BASE}/todos/bin`, {
                 headers: {
                     token: localStorage.getItem("token"),
                 },
@@ -36,7 +38,7 @@ export default function BinPage() {
 
         try {
             await axios.patch(
-                `https://todo-app-be-0kqo.onrender.com/todo/${todoId}`,
+                `${API_BASE}/todo/${todoId}`,
                 { category: "private" },
                 {
                     headers: {
@@ -55,7 +57,7 @@ export default function BinPage() {
         setBinTodos((prev) => prev.filter((t) => t._id !== todoId));
 
         try {
-            await axios.delete(`https://todo-app-be-0kqo.onrender.com/todo/${todoId}`, {
+            await axios.delete(`${API_BASE}/todo/${todoId}`, {
                 headers: {
                     token: localStorage.getItem("token"),
                 },
@@ -65,6 +67,35 @@ export default function BinPage() {
             setBinTodos((prev) => [...prev, todoToDelete]);
         }
     }
+
+    async function emptyBin() {
+        const snapshot = [...binTodos];
+        setBinTodos([]);
+        try {
+            await Promise.all(
+                snapshot.map((t) =>
+                    axios.delete(`${API_BASE}/todo/${t._id}`, {
+                        headers: { token: localStorage.getItem("token") },
+                    })
+                )
+            );
+        } catch (err) {
+            console.error("Error emptying bin:", err);
+            setBinTodos(snapshot);
+        }
+    }
+
+    const directDeleteInfoCard = (
+        <div className="bin-direct-delete-info-card">
+            <AlertTriangle className="bin-direct-delete-icon" />
+            <div>
+                <p className="bin-direct-delete-title">Direct deletion is on</p>
+                <p className="bin-direct-delete-desc">
+                    Todos you delete from now on will be permanently removed and won't be saved here. You can turn this off in Settings.
+                </p>
+            </div>
+        </div>
+    );
 
     return (
         <div className="display-flex">
@@ -78,6 +109,11 @@ export default function BinPage() {
                                 {binTodos.length} {binTodos.length === 1 ? "item" : "items"}
                             </span>
                         </div>
+                        {binTodos.length > 0 && (
+                            <button className="bin-empty-btn btnR" onClick={emptyBin} title="Empty bin">
+                                Empty bin
+                            </button>
+                        )}
                     </div>
 
                     {loading ? (
@@ -86,15 +122,20 @@ export default function BinPage() {
                             <p>Loading bin...</p>
                         </div>
                     ) : binTodos.length === 0 ? (
-                        <div className="bin-empty-state">
-                            <ArchiveX className="bin-empty-icon" />
-                            <h3 className="bin-empty-title">Your bin is empty</h3>
-                            <p className="bin-empty-desc">
-                                Deleted todos will appear here. You can restore them anytime or permanently remove them.
-                            </p>
-                        </div>
+                        directDelete ? (
+                            directDeleteInfoCard
+                        ) : (
+                            <div className="bin-empty-state">
+                                <ArchiveX className="bin-empty-icon" />
+                                <h3 className="bin-empty-title">Your bin is empty</h3>
+                                <p className="bin-empty-desc">
+                                    Deleted todos will appear here. You can restore them anytime or permanently remove them.
+                                </p>
+                            </div>
+                        )
                     ) : (
                         <div className="all-todos">
+                            {directDelete && directDeleteInfoCard}
                             {binTodos.map((todo) => {
                                 const formattedDate = todo.date
                                     ? new Date(todo.date).toLocaleDateString(undefined, {

@@ -61,6 +61,8 @@ export default function Nav() {
                         <User className="nav-icon" />
                     </Link>
                 )}
+            </div>
+            <div className="nav-bottom nav-items">
                 <Link
                     className={`btnC ${isBinActive ? "active" : ""}`}
                     to="/bin"
@@ -68,8 +70,6 @@ export default function Nav() {
                 >
                     <Trash2 className="nav-icon" />
                 </Link>
-            </div>
-            <div className="nav-bottom nav-items">
                 <Link
                     className={`btnC ${isSettingsActive ? "active" : ""}`}
                     to={`/${username}/settings`}
@@ -80,7 +80,7 @@ export default function Nav() {
                 <button
                     className="btnC theme-toggle-btn"
                     onClick={toggleTheme}
-                    title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                        title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
                     aria-label="Toggle color theme"
                 >
                     {theme === "dark" ? (
@@ -93,3 +93,4 @@ export default function Nav() {
         </div>
     );
 }
+

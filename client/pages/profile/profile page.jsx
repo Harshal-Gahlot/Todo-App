@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import Nav from "../nav/nav";
 import "./profile.css";
+import { API_BASE } from "../../utils/config";
 
 export default function ProfilePage() {
     const params = useParams();
@@ -18,8 +19,7 @@ export default function ProfilePage() {
         async function getProfileData() {
             try {
                 const res = await axios.get(
-                    `https://todo-app-be-0kqo.onrender.com/profile/${params.username}`,
-                    // `http://localhost:3000/profile/${params.username}`,
+                    `${API_BASE}/profile/${params.username}`,
                     { headers: { token: localStorage.getItem("token") } }
                 );
                 console.log(res);
@@ -53,8 +53,7 @@ export default function ProfilePage() {
         console.log(userData);
         try {
             axios.patch(
-                `https://todo-app-be-0kqo.onrender.com/api/follow/${userData.name}`,
-                // `http://localhost:3000/api/follow/${userData.name}`,
+                `${API_BASE}/api/follow/${userData.name}`,
                 {}, {
                 headers: {
                     token: localStorage.getItem("token"),

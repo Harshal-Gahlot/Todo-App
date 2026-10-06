@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { TodoContext } from "../../context api";
 import { Plus } from 'lucide-react';
+import { API_BASE } from "../../../utils/config";
 
 export default function CreateTodo({ createCategory = "public" }) {
     const [title, setTitle] = useState('');
@@ -25,8 +26,7 @@ export default function CreateTodo({ createCategory = "public" }) {
             setTodos((pre_todos) => [...pre_todos, { todo_title, "done": false, "_id": key, "tags": [], "isPinned": false, "category": createCategory }]);
             console.log("title:", todo_title);
             const res = await axios.post(
-                "https://todo-app-be-0kqo.onrender.com/todo", {
-            // "http://localhost:3000/todo", {
+                `${API_BASE}/todo`, {
                 title: todo_title, category: createCategory
             }, {
                 headers: { token: localStorage.getItem("token") }

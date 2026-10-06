@@ -14,7 +14,7 @@ console.timeEnd("importing mongoose...");
 console.log("importing required Model...");
 const { UserModel, TodoModel } = require("./DB");
 console.log("importing bcrypt...");
-const bcrypt = require("bcrypt"); // milding time consuming
+const bcrypt = require("bcryptjs"); // milding time consuming
 console.log("importing zod...");
 const { z } = require("zod");
 console.log("importing cors...");
@@ -26,8 +26,8 @@ console.log("all libs imported");
 
 mongoose.connect(process.env.MONGODB_URL);
 const PORT = process.env.PORT;
-const UPLOADTHING_TOKEN = process.env.UPLOADTHING_TOKEN;
 
+const UPLOADTHING_TOKEN = process.env.UPLOADTHING_TOKEN;
 const app = express();
 app.use(express.json());
 app.use(cors());

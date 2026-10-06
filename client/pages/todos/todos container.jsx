@@ -4,6 +4,7 @@ import { DndContext, KeyboardSensor, MouseSensor, PointerSensor, TouchSensor, cl
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { TodoContext } from "../context api";
 import SingleTodo from "./components/single todo";
+import { API_BASE } from "../../utils/config";
 
 export default function TodoList({ showCategory = "all" }) {
     const { todos, setTodos } = useContext(TodoContext);
@@ -38,8 +39,7 @@ export default function TodoList({ showCategory = "all" }) {
             // TODO: Missing Loading & Error States
             try {
                 const res = await axios.get(
-                    // `https://todo-app-be-0kqo.onrender.com/todos/${showCategory}`, {
-                    `http://localhost:3000/todos/${showCategory}`, {
+                    `${API_BASE}/todos/${showCategory}`, {
                     headers: {
                         token: localStorage.getItem("token")
                     }
