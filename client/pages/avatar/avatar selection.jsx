@@ -4,6 +4,7 @@ import axios from 'axios';
 import { updateProfile } from '../../utils/update profile';
 import useClosePopupOutside from '../../utils/close outside click';
 import "./avatar.css";
+import { API_BASE } from "../../utils/config";
 
 export default function AvatarSelection({ setShowAvatarSelection }) {
 	const [images, setImages] = useState([]);

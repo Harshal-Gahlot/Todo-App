@@ -1,0 +1,173 @@
+.toggle-switch-wrapper {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toggle-label {
+    font-size: 14px;
+    color: var(--text-muted-light);
+    cursor: pointer;
+    user-select: none;
+    flex: 1;
+    min-width: 0;
+}
+
+.toggle-track-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.toggle-track-container:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 50px;
+}
+
+.toggle-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+/* Pill variant - sliding text options */
+.toggle-switch-wrapper.pill .toggle-track {
+    position: relative;
+    display: flex;
+    background-color: var(--bg-light);
+    border-radius: 50px;
+    padding: 2px;
+    height: 32px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    user-select: none;
+    transition:
+        background-color var(--transition-fast),
+        border-color var(--transition-fast);
+    min-width: 140px;
+}
+
+.toggle-switch-wrapper.pill .toggle-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 0 2ch;
+    height: 100%;
+    white-space: nowrap;
+    transition: color var(--transition-fast);
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    min-width: 0;
+}
+
+.toggle-switch-wrapper.pill .toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: calc(100% - 4px);
+    background-color: var(--accent-shade);
+    border-radius: 50px;
+    z-index: 1;
+    transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    will-change: transform;
+    width: 50%;
+}
+
+.toggle-switch-wrapper.pill .toggle-track-container:hover .toggle-thumb {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/*// i want  */
+
+.toggle-switch-wrapper.pill
+    input:checked
+    ~ .toggle-track
+    .toggle-option-second {
+    color: white;
+}
+
+.toggle-switch-wrapper.pill
+    input:not(:checked)
+    ~ .toggle-track
+    .toggle-option-first {
+    color: white;
+}
+
+/* Simple variant - traditional on/off toggle */
+.toggle-switch-wrapper.simple .toggle-track {
+    width: 48px;
+    height: 26px;
+    border-radius: 50px;
+    background-color: var(--bg-light);
+    border: 1px solid var(--border);
+    transition:
+        background-color var(--transition-fast),
+        border-color var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.horizontal-divider {
+    width: 90%;
+    margin: 8px;
+    justify-self: center;
+    border-top: 1px solid var(--border);
+}
+
+.toggle-switch-wrapper.simple .toggle-thumb-simple {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--text-muted);
+    transition:
+        transform var(--transition-fast),
+        background-color var(--transition-fast);
+    transform: translateX(0);
+    will-change: transform;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-switch-wrapper.simple .toggle-input:checked + .toggle-track {
+    background-color: var(--text-accent);
+}
+
+.toggle-switch-wrapper.simple
+    .toggle-input:checked
+    + .toggle-track
+    .toggle-thumb-simple {
+    background-color: white;
+    transform: translateX(20px);
+}
+
+.toggle-switch-wrapper.simple
+    .toggle-track-container:hover
+    .toggle-thumb-simple {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Disabled state */
+.toggle-input:disabled + .toggle-track {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.toggle-input:disabled + .toggle-track .toggle-thumb,
+.toggle-input:disabled + .toggle-track .toggle-thumb-simple {
+    box-shadow: none;
+}

@@ -3,6 +3,7 @@ import axios from "axios";
 import Nav from "../nav/nav";
 import FeedTodo from "./components/feed todo";
 import "./feed page.css";
+import { API_BASE } from "../../utils/config";
 
 export default function FeedPage() {
     const [feedCards, setfeedCards] = useState({});
@@ -41,10 +42,10 @@ export default function FeedPage() {
             prev.map((todo) =>
                 todo._id === todoId
                     ? {
-                          ...todo,
-                          likes: isLiked ? todo.likes - 1 : todo.likes + 1,
-                          userLiked: !isLiked,
-                      }
+                        ...todo,
+                        likes: isLiked ? todo.likes - 1 : todo.likes + 1,
+                        userLiked: !isLiked,
+                    }
                     : todo,
             ),
         );

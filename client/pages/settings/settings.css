@@ -39,7 +39,6 @@
     width: 100%;
     font-size: 14px;
     color: var(--text-muted-light);
-    border-top: 1px solid var(--border);
 }
 
 .defaults-list:first-of-type {
@@ -48,116 +47,6 @@
 
 .defaults-list * {
     cursor: pointer;
-}
-
-/* Category toggle (Private / Public sliding pill) */
-.toggle-input {
-    position: relative;
-    display: flex;
-    appearance: none;
-}
-
-.toggle-input::before {
-    content: "Private       Public";
-    white-space: pre;
-    text-align: center;
-    background-color: var(--bg-light);
-    color: var(--text-muted);
-    width: fit-content;
-    padding-left: 2ch;
-    padding-right: 2ch;
-    height: 32px;
-    line-height: 32px;
-    font-size: larger;
-    border-radius: 50px;
-}
-
-.toggle-input::after {
-    content: "Private";
-    text-align: center;
-    padding-left: 2ch;
-    padding-right: 2ch;
-    width: fit-content;
-    background-color: var(--accent-shade);
-    color: white;
-    height: 32px;
-    line-height: 32px;
-    font-size: larger;
-    border-radius: 50px;
-    position: absolute;
-}
-
-.toggle-input:checked::after {
-    content: "Public";
-    text-align: center;
-    padding-left: 2ch;
-    padding-right: 2ch;
-    width: fit-content;
-    background-color: var(--accent-shade);
-    color: white;
-    height: 32px;
-    line-height: 32px;
-    font-size: larger;
-    border-radius: 50px;
-    position: absolute;
-    transform: translateX(calc(9ch + 0.9px));
-}
-
-/* Simple on/off toggle for other settings */
-.toggle-input-simple {
-    width: 44px;
-    height: 24px;
-    border-radius: 50px;
-    background-color: var(--bg-light);
-    border: 1px solid var(--border);
-    transition: background-color var(--transition-fast), border-color var(--transition-fast);
-    cursor: pointer;
-    flex-shrink: 0;
-}
-
-.toggle-input-simple::before {
-    content: "";
-    position: absolute;
-    width: 44px;
-    height: 24px;
-    border-radius: 50px;
-    background-color: var(--bg-light);
-    border: 1px solid var(--border);
-    top: 0;
-    left: 0;
-}
-
-.toggle-input-simple::after {
-    content: "";
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background-color: var(--text-muted);
-    top: 3px;
-    left: 3px;
-    transition: transform var(--transition-fast), background-color var(--transition-fast);
-    transform: none;
-    font-size: 0;
-    padding: 0;
-}
-
-.toggle-input-simple:checked {
-    background-color: var(--text-accent);
-    border-color: var(--text-accent);
-}
-
-.toggle-input-simple:checked::before {
-    background-color: var(--text-accent);
-    border-color: var(--text-accent);
-}
-
-.toggle-input-simple:checked::after {
-    content: "";
-    background-color: white;
-    transform: translateX(20px);
-    font-size: 0;
-    padding: 0;
 }
 
 .toggle-switch input {
@@ -177,7 +66,9 @@
     overflow: hidden;
     border: 1px solid var(--border);
     user-select: none;
-    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+    transition:
+        background-color var(--transition-fast),
+        border-color var(--transition-fast);
 }
 
 .toggle-option {
@@ -204,7 +95,9 @@
     background-color: var(--accent-shade);
     border-radius: 50px;
     z-index: 1;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     will-change: transform;
 }

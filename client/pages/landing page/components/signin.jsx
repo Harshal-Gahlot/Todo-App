@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { TodoContext } from "../../context api";
 import { Loader } from "lucide-react";
+import { API_BASE } from "../../../utils/config";
 
 export default function Signin() {
     console.log("in Sign in component");
@@ -14,7 +15,7 @@ export default function Signin() {
 
     async function sendSigninReq(event) {
         event.preventDefault();
-        console.log("in sendSiginReq", email, password);
+        console.log("in sendSigninReq", email, password);
         try {
             setReqSendBtnState(loadingAnime);
             const res = await axios.post(
@@ -32,8 +33,8 @@ export default function Signin() {
                 setValidationErrorMessage(res.data.ErrorMessage);
             }
         } catch (e) {
-            setValidationErrorMessage("Error occured while signing in");
-            console.log(`Error occured: ${e}`);
+            setValidationErrorMessage("Error occurred while signing in");
+            console.log(`Error occurred: ${e}`);
         }
     }
     return (

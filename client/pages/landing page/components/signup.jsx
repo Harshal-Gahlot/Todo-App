@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { TodoContext } from "../../context api";
 import { Loader } from "lucide-react";
+import { API_BASE } from "../../../utils/config";
 
 export default function Signup() {
     console.log("in Sign up component");

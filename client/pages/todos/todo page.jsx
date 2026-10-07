@@ -44,7 +44,7 @@ export default function TodoPage() {
                 <div id="todo-page">
                     <div className="todo-page-header-container">
                         <div className="todo-page-header-left">
-                            <p className="todo-page-header-text">Your Todos</p>
+                            <h1 className="todo-page-header-text">Todos</h1>
                         </div>
                         <div className="todo-page-header-right">
                             <TodoCategorySwitcher showCategory={showCategory} setShowCategory={setShowCategory} />

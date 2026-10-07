@@ -104,7 +104,7 @@ export default function BinPage() {
                 <div id="bin-container">
                     <div className="bin-header">
                         <div className="bin-title">
-                            <span>Bin</span>
+                            <h1>Bin</h1>
                             <span className="bin-count-badge">
                                 {binTodos.length} {binTodos.length === 1 ? "item" : "items"}
                             </span>

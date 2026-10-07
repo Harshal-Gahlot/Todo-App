@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_BASE } from "./config";
 
 export async function updateProfile(updatedData) {
     // let outDatedData;
