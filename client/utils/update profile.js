@@ -14,8 +14,7 @@ export async function updateProfile(updatedData) {
     // console.log('\ntodoId:', todoId, '\nupdatedData:', updatedData, '\noutDatedData:', outDatedData);
     try {
         const res = await axios.patch(
-            `https://todo-app-be-0kqo.onrender.com/profile`,
-            // `http://localhost:3000/profile`,
+            `${API_BASE}/profile`,
             updatedData,
             {
                 headers: {

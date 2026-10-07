@@ -15,8 +15,7 @@ export default function AvatarSelection({ setShowAvatarSelection }) {
 		const fetchImages = async () => {
 			try {
 				const response = await axios.get(
-					'https://todo-app-be-0kqo.onrender.com/api/uploaded-images'
-					// 'http://localhost:3000/api/uploaded-images'
+					`${API_BASE}/api/uploaded-images`
 				);
 				console.log("response:", response.data);
 				setImages(response.data);

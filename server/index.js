@@ -32,7 +32,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-console.log("connedted to DB and const init");
+console.log("connected to DB and const init");
 
 app.post("/signup", async (req, res) => {
     console.log("signup req came");

@@ -14,8 +14,7 @@ export default function FeedPage() {
             try {
                 setLoading(true);
                 const res = await axios.get(
-                    // "https://todo-app-be-0kqo.onrender.com/api/feed",
-                    "http://localhost:3000/api/feed",
+                    `${API_BASE}/api/feed`,
                     { headers: { token: localStorage.getItem("token") } },
                 );
                 setfeedCards(res.data);

@@ -1,0 +1,11 @@
+{
+    "name": "whatcha-doing-monorepo",
+    "private": true,
+    "packageManager": "pnpm@12.9.1",
+    "scripts": {
+        "dev": "pnpx concurrently \"pnpm --filter todo-app-frontend dev\" \"pnpm --filter todo-app-backend dev\""
+    },
+    "devDependencies": {
+        "concurrently": "^10.0.5"
+    }
+}
